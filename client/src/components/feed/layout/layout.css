@@ -1,0 +1,63 @@
+body
+{
+    margin:0px;
+
+}
+
+.body-grid-container
+{
+    display:grid;
+    grid-template-areas: 
+    "hd hd hd "
+    "nav feed info";
+    grid-template-columns:1fr 3fr 1fr;
+    grid-auto-rows: minmax(80px, auto);
+    align-items: end;
+
+}
+
+.header
+{
+    grid-area:hd;
+    background-color: gold;
+    position: relative;
+}
+
+.nav-grid-column
+{
+    grid-area:nav;  
+    background-color: grey;
+    position: relative;
+    align-self: stretch;
+    display:flexbox;
+    flex-direction: row;
+}
+
+.nav-grid-column >button
+{
+    margin-top: 20px; 
+    margin-left:5px;
+    border-radius:10px;
+}
+
+
+.info-grid-column
+{
+    grid-area:info;
+    background-color: lime;
+    position: relative;
+    align-self: stretch;
+    
+}
+
+.feed-grid-column
+{
+    grid-area:feed;
+    background-color:royalblue;
+    position: relative;
+    align-self: stretch;
+    display:flexbox;
+    flex-direction: row;
+    
+   
+}

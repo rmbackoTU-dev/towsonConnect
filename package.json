@@ -1,0 +1,24 @@
+{
+  "name": "towsonconnect",
+  "version": "1.0.0",
+  "description": "Towson Connect is a collaborative web application for Towson Teachers and students, developed for COSC 617: Advance Web Development. The application combines message boards and media spaces to provide an area where users can communicate, share, and grade files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmbackoTU-dev/towsonConnect.git"
+  },
+  "keywords": [
+    "COSC617",
+    "MERN",
+    "LMS"
+  ],
+  "author": "group 5",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/rmbackoTU-dev/towsonConnect/issues"
+  },
+  "homepage": "https://github.com/rmbackoTU-dev/towsonConnect#readme"
+}
