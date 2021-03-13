@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/rmbackoTU-dev/towsonConnect/issues"
   },
-  "homepage": "https://github.com/rmbackoTU-dev/towsonConnect#readme"
+  "homepage": "https://github.com/rmbackoTU-dev/towsonConnect#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2"
+  }
 }
