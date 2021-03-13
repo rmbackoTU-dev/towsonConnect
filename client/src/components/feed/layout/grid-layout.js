@@ -1,12 +1,17 @@
 import React, {Component, Fragment} from 'react';
 import NotifyItemList from '../notifications/NotifyItem';
+import './layout.css'
 
 const BodyHeader=() =>
 {
     return(
-    <div className="pageHeader">
-        <h1>Welcome to Towson Connect</h1>
-    </div>
+    <Fragment>
+        <div className="logo">
+        </div>
+        <div className="header">
+            <h1>Welcome to Towson Connect</h1>
+        </div>
+    </Fragment>
     );
     
 }

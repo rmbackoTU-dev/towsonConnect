@@ -4,6 +4,8 @@
  */
 import React, {Component} from 'react';
 import Layout from './components/feed/layout/grid-layout';
+import './index.css'
+
 
 
 class App extends Component
