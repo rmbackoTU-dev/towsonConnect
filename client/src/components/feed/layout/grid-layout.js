@@ -56,10 +56,10 @@ class Layout extends Component
                     <button onClick={() => this.createnotification()}>Create Sample Notification!</button>
                 </div>
                 <div className="feed-grid-column">
-                    <Fragment>
-                    <NotifyItemList notificationArray={this.state.notifications} 
-                    notificationNumber={this.state.notificationCount} notificationUpdated={this.state.updated} />
-                    </Fragment>
+                    <div id="feed-items">
+                        <NotifyItemList notificationArray={this.state.notifications} 
+                        notificationNumber={this.state.notificationCount} notificationUpdated={this.state.updated} />
+                    </div>
                 </div>
                 <div className="info-grid-column"></div>
             </div>
