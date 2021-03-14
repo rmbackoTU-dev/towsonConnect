@@ -1,0 +1,28 @@
+.feed-grid-column
+{
+    grid-area:feed;
+    background-color:royalblue;
+    position: relative;
+    align-self: stretch;
+    display:flexbox;
+    flex-direction: row;
+}
+
+#feed-items
+{
+    position:relative;
+    width:100%;
+    left:30%;
+    right:auto;
+}
+
+#refreshButton
+{
+    position:absolute;
+    cursor: pointer;
+    top: 0;
+    right:0;
+    background-color:transparent;
+    margin: 1em 1em 4em 1em;
+   
+}

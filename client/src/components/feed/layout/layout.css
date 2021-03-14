@@ -34,14 +34,6 @@
     flex-direction: row;
 }
 
-.nav-grid-column >button
-{
-    margin-top: 20px; 
-    margin-left:5px;
-    border-radius:10px;
-}
-
-
 .info-grid-column
 {
     grid-area:info;
@@ -49,22 +41,4 @@
     position: relative;
     align-self: stretch;
     
-}
-
-.feed-grid-column
-{
-    grid-area:feed;
-    background-color:royalblue;
-    position: relative;
-    align-self: stretch;
-    display:flexbox;
-    flex-direction: row;
-}
-
-#feed-items
-{
-    position:relative;
-    width:100%;
-    left:30%;
-    right:auto;
 }
