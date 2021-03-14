@@ -8,7 +8,14 @@
     flex-direction: row;
 }
 
-#feed-items
+.notify-list
+{
+    position:relative;
+    width:300px;
+    margin: 2em 1em 4em 1em;
+}
+
+.notify-item
 {
     position:relative;
     width:100%;

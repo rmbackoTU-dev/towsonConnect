@@ -35,6 +35,7 @@ class Feed extends Component
                  notificationCount:updatedNotificationCount
              }
          );
+         console.log(this.state.notificationCount);
     }
 
 
@@ -51,7 +52,6 @@ class Feed extends Component
                         <NotifyItemList notificationArray={this.state.notifications}
                         notificationNumber={this.state.notificationCount} notificationUpdated={this.state.updated} 
                         />
-
                     </div>
             </div>
         );
