@@ -1,0 +1,121 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif;
+  text-align: center;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  height: 100%;
+  background: #0f2027;
+  background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+}
+
+.form_box {
+  position: relative;
+  border-radius: 12px;
+
+  width: 380px;
+  margin: 6% auto;
+  padding: 6px;
+
+  background: #fff;
+}
+
+.button_box {
+  width: 225px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #2124;
+  border-radius: 22px;
+}
+
+.button_box a {
+  color: black;
+}
+
+.btn {
+  padding: 10px 27px;
+  border-radius: 22px;
+}
+.button_box .btn-primary {
+  background: linear-gradient(
+    50%,
+    #2193b0,
+    #2124
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.button_box .btn {
+  border: 0;
+  padding: 10px 30px;
+}
+
+.icons {
+  position: relative;
+  margin: 30px auto;
+
+  text-align: center;
+}
+.icons i {
+  font-size: 22px;
+  margin: 0 12px;
+  box-shadow: 0 0 20px 0 #37f7f73d;
+}
+
+.icons .btn {
+  padding: 10px 52px;
+  font-family: "Ubuntu", sans-serif;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+.icons .btn-outline-primary {
+  margin-top: 20px;
+}
+
+.icon_img {
+  text-align: center;
+}
+.icon_img img {
+  width: 141px;
+}
+.icon_img p{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+span{
+  font-family: sans-serif;
+  font-size: 12px;
+  padding: 10px;
+}
+ .form-group input{
+   width: 74%;
+   margin: auto;
+ }
+
+ .form-control:focus{
+  border-color: #b7ca0d;
+  box-shadow: 0 0 0 3px #ffe864
+ }
+
+
+@media (min-width:320px) and (max-width: 746px) {
+  .form_box {
+    width: 317px;
+  }
+
+  .icon_img img{
+    width: 106px;
+  }
+  
+  span{
+    font-size: 10px;
+  }
+}
+
