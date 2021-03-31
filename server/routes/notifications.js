@@ -12,7 +12,7 @@ var Role=require=require('../models/Role');
 /**
  * Notification end points by user
  */
-router.get('/:userid', async (req, res) => 
+router.get('/user/:userid', async (req, res) => 
 {
     var user=User.findById(req.params.userid,  async (err, user) =>
     {
@@ -33,9 +33,9 @@ router.get('/:userid', async (req, res) =>
 /**
  * Notification end points by role
  */
- router.get('/:roleid', async(req, res) => 
+ router.get('/role/:roleid', async(req, res) => 
  {
-     var user=Role.findById(req.params.roleid, async(err, user) =>
+     var role=Role.findById(req.params.roleid, async(err, role) =>
      {
          if(err)
          {
@@ -43,8 +43,9 @@ router.get('/:userid', async (req, res) =>
          }
          else
          {
+             console.log(role);
              //only get notification for that users access token
-             var notificationsForUser= await Notification.find({'access_token': user.access_token}).exec();
+             var notificationsForUser= await Notification.find({'access_token': role.access_token}).exec();
              res.status(200).json(notificationsForUser);
          }
      });
@@ -60,9 +61,9 @@ router.get('/:userid', async (req, res) =>
     let requestBody=req.body;
     var notificationData= {
         access_token:requestBody.access_token,
-        short_descript: requestBody.short,
-        long_descript: requestBody.long,
-        hyperlink:requestBody.link,
+        short_descript: requestBody.short_descript,
+        long_descript: requestBody.long_descript,
+        hyperlink:requestBody.hyperlink,
         header: requestBody.header
     };
     var newNotification=new Notification(notificationData);
@@ -71,7 +72,7 @@ router.get('/:userid', async (req, res) =>
     {
         var saved=newNotification.save();
         var successMessage="Sucess: "+JSON.stringify(newNotification);
-        res.status(201).send(successMessage);
+        res.json(newNotification);
     }
     catch(err)
     {

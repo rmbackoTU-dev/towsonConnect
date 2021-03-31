@@ -36,24 +36,26 @@ app.get('/', (req, res) => {
 //DB_CONNECTION comes from the .env file; it is the database url
 var options = {useNewUrlParser: true, useUnifiedTopology: true};
 mongoose.connect(process.env.DB_CONNECTION, options)
-    .then( () => {
+    .then( async () => {
         console.log('Successfully connected to the database');
         //Create default data
         //only two roles so create them on the spot
         //TODO: later substitute a generated code through b-crypt for the access tokens
         var teacher={
             role_Name:"Teacher",
-            access_Token:"t-01"
+            access_token:"t-01"
         };
 
         var student={
             role_Name:"Student",
-            access_Token:"s-01"
+            access_token:"s-01"
         };
         var teacherRole=new Role(teacher);
         var studentRole=new Role(student);
-        teacherDoc=teacherRole.save();
-        studentDoc=studentRole.save();
+        teacherDoc=await teacherRole.save();
+        studentDoc=await studentRole.save();
+        console.log(teacherDoc);
+        console.log(studentDoc);
         //Listen on port
         app.listen(port);
         console.log('Listening on port ' + port);

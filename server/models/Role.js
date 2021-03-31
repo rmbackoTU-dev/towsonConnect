@@ -14,7 +14,7 @@ var Schema=mongoose.Schema;
 
 var Role=new Schema({
     role_Name:String,
-    access_Token:String
+    access_token:String
 });
 
 
