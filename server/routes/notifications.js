@@ -1,5 +1,4 @@
 var express = require('express');
-var request=require('request');
 var router=express.Router();
 
 //Import User model
@@ -13,9 +12,9 @@ var Role=require=require('../models/Role');
 /**
  * Notification end points by user
  */
-router.get('/:userid', async(req, res) => 
+router.get('/:userid', async (req, res) => 
 {
-    var user=User.findById(req.params.userid, (err, user) =>
+    var user=User.findById(req.params.userid,  async (err, user) =>
     {
         if(err)
         {
@@ -36,7 +35,7 @@ router.get('/:userid', async(req, res) =>
  */
  router.get('/:roleid', async(req, res) => 
  {
-     var user=Role.findById(req.params.roleid, (err, user) =>
+     var user=Role.findById(req.params.roleid, async(err, user) =>
      {
          if(err)
          {
@@ -56,7 +55,7 @@ router.get('/:userid', async(req, res) =>
  /**
   * Post a Notification 
   */
- router.get('/', async(req,res) =>
+ router.post('/', async(req,res) =>
  {
     let requestBody=req.body;
     var notificationData= {
@@ -79,3 +78,5 @@ router.get('/:userid', async(req, res) =>
         res.status(403).json({message:err});
     }
  });
+
+ module.exports=router;

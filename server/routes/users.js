@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 //imports User model
 var User = require('../models/User');
+var Role = require('../models/Role');
 
 //gets all the users
 router.get('/', async (req, res) => {
@@ -17,7 +18,45 @@ router.get('/', async (req, res) => {
 
 //submits/saves a user
 router.post('/', async (req,res) => {
-    var user = req.body;
+    // var user = req.body;
+    // var userRole;
+    if(req.body.role === "teacher")
+    {
+        try
+        {
+            userRole=await Role.findOne({role_Name:"Teacher"});
+        }
+        catch(err)
+        {
+            res.status(400).json({ message: err });
+        }
+    }
+    else if( req.body.role === "student")
+    {
+        try
+        {
+            userRole=await Role.findOne({role_Name:'Student'});
+            console.log(userRole);
+        }
+        catch(err)
+        {
+            res.status(400).json({ message: err });
+        }
+    }
+    else
+    {
+        res.status(403).json({message:"Error role "+
+        req.body.role+" does not exist"});
+    }
+
+    var user=
+    {
+        fname:req.body.fname,
+        lname:req.body.lname,
+        age:req.body.age,
+        role:userRole._id,
+        access_token:req.body.access_token
+    }
     var newUser = new User(user);
 
     try{
@@ -31,12 +70,17 @@ router.post('/', async (req,res) => {
 
 //get specific user
 router.get('/:userId', async (req,res) => {
-    try{
-        var user = await User.findById(req.params.userId);
-        res.json(user);
-    } catch(err) {
-        res.json({ message: err });
-    }
+    User.findById(req.params.userId).populate('role').exec( function(err, user)
+    {
+        if(err)
+        {
+                res.json({message: err});
+        }
+        else
+        {
+            res.json(user);
+        }
+    });
 });
 
 
