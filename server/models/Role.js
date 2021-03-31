@@ -1,5 +1,6 @@
 //Require Mongoose
 var mongoose=require('mongoose');
+const { findOneAndUpdate } = require('./Notification');
 
 /**Schema model for 
  *      NOTIFICATION:
@@ -15,21 +16,6 @@ var Role=new Schema({
     role_Name:String,
     access_Token:String
 });
-
-//only two roles so create them on the spot
-//TODO: later substitute a generated code through b-crypt for the access tokens
-var teacher=new Role({
-    role_Name:"Teacher",
-    access_Token:"t-01"
-});
-
-var teacher=new Role({
-    role_Name:"Student",
-    access_Token:"s-01"
-});
-
-
-
 
 
 module.exports=mongoose.model('Role', Role);
