@@ -1,5 +1,4 @@
-//Require Mongoose
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
 
 /**Schema model for 
  *      NOTIFICATION:
@@ -11,6 +10,7 @@ var mongoose=require('mongoose');
  */
 
 //Define a schema
+/*
 var Schema=mongoose.Schema;
 
 var Notification = new Schema({
@@ -20,5 +20,14 @@ var Notification = new Schema({
     hyperlink:String,
     header: String
 });
+*/
 
-module.exports=mongoose.model('Notification', Notification);
+var NotificationSchema = mongoose.Schema({
+    access_token: String,
+    short_description: String,
+    long_description: String,
+    header: String
+});
+
+//module.exports=mongoose.model('Notification', Notification);
+module.exports = mongoose.model("Notification", NotificationSchema);

@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
+
 //imports Message model
 var Message = require('../models/Message');
 //imports Thread model
 var Thread = require('../models/Thread');
 
-//gets all the threads
+// gets all the threads
 router.get('/', async (req, res) => {
     try{
         var threads = await Thread.find();
@@ -20,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 
-//submits/saves a thread
+// submits/saves a thread
 router.post('/', async (req,res) => {
     var thread = req.body;
     var newThread = new Thread(thread);
@@ -34,7 +35,7 @@ router.post('/', async (req,res) => {
 });
 
 
-//get specific thread
+// get specific thread
 router.get('/:threadId', async (req,res) => {
     try{
         var thread = await Thread.findById(req.params.threadId);
@@ -57,7 +58,7 @@ router.get('/:threadId', async (req,res) => {
 });
 
 
-//Delete thread
+// Delete thread
 router.delete('/:threadId', async (req,res) => {
     try{
         var removedThread = await Thread.remove({ _id: req.params.threadId });

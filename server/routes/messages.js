@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
+
 //imports Message model
 var Message = require('../models/Message');
 
 
-//gets all the messages
+// gets all the messages
 router.get('/', async (req, res) => {
     try{
         var messages = await Message.find();
@@ -19,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 
-//submits/saves a message
+// submits/saves a message
 router.post('/', async (req,res) => {
     var message = req.body;
     var newMessage = new Message(message);
@@ -33,7 +34,7 @@ router.post('/', async (req,res) => {
 });
 
 
-//get specific message using a userID
+// get specific message using a userID
 router.get('/:messageUserId', async (req,res) => {
     try{
         var message = await Message.find().where({ user_id: req.params.messageUserId });
@@ -44,7 +45,7 @@ router.get('/:messageUserId', async (req,res) => {
 });
 
 
-//Delete message
+// Delete message
 router.delete('/:messageId', async (req,res) => {
     try{
         var removedMessage = await Message.remove({ _id: req.params.messageId });

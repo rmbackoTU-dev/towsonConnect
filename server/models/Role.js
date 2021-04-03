@@ -1,5 +1,4 @@
-//Require Mongoose
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
 const { findOneAndUpdate } = require('./Notification');
 
 /**Schema model for 
@@ -10,12 +9,19 @@ const { findOneAndUpdate } = require('./Notification');
  */
 
 //Define a schema
-var Schema=mongoose.Schema;
+/*
+var Schema = mongoose.Schema;
 
 var Role=new Schema({
     role_Name:String,
     access_token:String
 });
+*/
 
+var RoleSchema = mongoose.Schema({
+    role_name: String,
+    access_token: String
+});
 
-module.exports=mongoose.model('Role', Role);
+module.exports = mongoose.model('Role', RoleSchema);
+// module.exports = mongoose.model('Role', RoleSchema);
