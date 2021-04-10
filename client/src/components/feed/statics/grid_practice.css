@@ -1,0 +1,233 @@
+
+@font-face {
+    font-family:"proxima-nova";
+    src:url("https://use.typekit.net/af/d45b9a/000000000000000077359577/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3") 
+    format("woff2"),
+    url("https://use.typekit.net/af/d45b9a/000000000000000077359577/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3") 
+    format("woff"),
+    url("https://use.typekit.net/af/d45b9a/000000000000000077359577/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3") 
+    format("opentype");
+    font-display:auto;font-style:normal;font-weight:400;
+    }
+
+head{
+    margin:0;
+}
+
+body{
+    margin:0;
+    font-family:'Proxima Nova';
+}
+
+.wrapper  {
+    display : grid;
+    grid-template-columns: 128px repeat(2, 1fr);
+    grid-auto-rows: 100px 1fr;
+    height: 100vh;
+    margin:0;
+}
+
+.box1 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start:1;
+    grid-row-end:2;
+    display: grid;
+    background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+    grid-auto-rows:56px 1fr;
+    grid-auto-columns: 160px 1fr;
+
+}
+
+.box1-top {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start:1;
+    grid-row-end:2;
+    display: grid;
+    grid-auto-columns: 160px 1fr;
+    grid-auto-rows:auto;
+}
+
+.logo-icon
+{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.login-flex
+{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.login-div
+{
+    height:60px;
+    width:50px;
+}
+
+.logout-div
+{
+    height:60px;
+    width:50px;
+}
+
+.login-div> p
+{
+    color:#ffffff;
+}
+
+.logout-div> p
+{
+    color:#ffffff;
+}
+
+
+.login-div> p:hover
+{
+    color:#ffe864;
+}
+
+.logout-div> p:hover
+{
+    color:#ffe864
+}
+
+.user-icon
+{
+    background:white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height:40px;
+    width:40px;
+    padding:1px;
+    margin: 5px 15px 5px 5px;
+    overflow:hidden
+}
+
+.user-icon > img {
+    margin:2px auto 0px auto;
+}
+
+
+
+.box2 {
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start:2;
+    grid-row-end:3;
+    display:grid;
+    grid-template-columns:  60px 1fr;
+}
+
+.sideBar
+{
+    grid-column-start:1;
+    grid-column-end: 2;
+    grid-row-start:1;
+    grid-row-end:3;
+}
+
+.sideBar > img
+{
+    margin: 5px 5px 5px 5px; 
+}
+
+.feedbox {
+    grid-column-start: 2;
+    grid-column-end: end;
+    grid-row-start:1;
+    grid-row-end:3;
+    display:grid;
+    grid-template-columns: 256px 1fr;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    border: 1px solid #BBB
+}
+
+.left-feed
+{
+    background:#E7E5E0;
+    
+}
+
+.course_list 
+{
+    list-style-type:none;
+    font-weight: bold;
+}
+
+.course_list > li > a:link
+{
+    text-decoration:none;
+}
+
+.right-feed
+{
+    background: #ffffff;
+    /* margin: 0 0 0 280px; */
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    border-left: 1px solid #BBB;
+    z-index: 10;
+    
+}
+
+.notificationTitle
+{
+    border-bottom: 1px solid #BBB;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+   
+}
+
+.feed-items
+{
+    margin: 5px 25px 15px 25px;
+}
+
+.feed-item
+{
+    border: 1px solid #BBB;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    padding:10px;
+}
+
+.navbox
+{
+    grid-column-start:1;
+    grid-column-end: 3;
+    grid-row-start:2;
+    grid-row-end:3;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    margin-left: auto;
+    margin-right:0;
+}
+
+.nav-link{
+    height: 20px;
+    width: 100px;
+}
+
+
+.nav-link> a:hover
+{
+    color:#ffe864;
+    text-decoration: currentColor;
+}
+
+.nav-link> a
+{
+    color:ffffff;
+    text-decoration: currentColor;
+}

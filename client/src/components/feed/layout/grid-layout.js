@@ -8,6 +8,7 @@ const BodyHeader=() =>
     return(
     <Fragment>
         <div className="logo">
+            <p>Logo</p>
         </div>
         <div className="header">
             <h1>Welcome to Towson Connect</h1>
@@ -26,7 +27,7 @@ class Layout extends Component
             <div className="body-grid-container">
                 <BodyHeader />
                 <Feed />
-                <div className="info-grid-column"></div>
+                <div className="emptySpace"></div>
             </div>
         );
     }
