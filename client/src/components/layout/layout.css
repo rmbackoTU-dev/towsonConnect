@@ -1,0 +1,160 @@
+
+
+head{
+    margin:0;
+}
+
+body{
+    margin:0;
+    
+}
+
+.towsonLogo 
+{
+    height: '53px';
+    width:'160px';
+}
+
+.wrapper  {
+    display : grid;
+    grid-template-columns: 128px repeat(2, 1fr);
+    grid-auto-rows: 100px 1fr;
+    height: 100vh;
+    margin:0;
+}
+
+.header {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start:1;
+    grid-row-end:2;
+    display: grid;
+    background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+    grid-auto-rows:56px 1fr;
+    grid-auto-columns: 160px 1fr;
+
+}
+
+.header-top{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start:1;
+    grid-row-end:2;
+    display: grid;
+    grid-auto-columns: 160px 1fr;
+    grid-auto-rows:auto;
+}
+
+.logo-icon
+{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.accountFlex
+{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.login-div
+{
+    height:60px;
+    width:50px;
+}
+
+.logout-div
+{
+    height:60px;
+    width:50px;
+}
+
+.login-div> p
+{
+    color:#ffffff;
+}
+
+.logout-div> p
+{
+    color:#ffffff;
+}
+
+
+.login-div> p:hover
+{
+    color:#ffe864;
+}
+
+.logout-div> p:hover
+{
+    color:#ffe864
+}
+
+.user-icon
+{
+    background:white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height:40px;
+    width:40px;
+    padding:1px;
+    margin: 5px 15px 5px 5px;
+    overflow:hidden
+}
+
+.user-icon > img {
+    margin:2px auto 0px auto;
+}
+
+
+
+.box2 {
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start:2;
+    grid-row-end:3;
+    display:grid;
+    grid-template-columns:  60px 1fr;
+}
+
+.navbox
+{
+    grid-column-start:1;
+    grid-column-end: 3;
+    grid-row-start:2;
+    grid-row-end:3;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    margin-left: auto;
+    margin-right:0;
+}
+
+.navBox > div{
+    height: 20px;
+    width: 100px;
+}
+
+.linkSelected
+{
+    background-color: white;
+}
+
+.linkUnselected
+{
+    background-color: black;
+}
+
+.linkSelected> a
+{
+    color:#ffe864;
+    text-decoration: currentColor;
+}
+
+.linkUnselected> a
+{
+    color:ffffff;
+    text-decoration: currentColor;
+}

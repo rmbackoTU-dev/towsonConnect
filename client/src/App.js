@@ -3,8 +3,7 @@
  * all of the modifications to index.js should happen here
  */
 import React, {Component} from 'react';
-import Layout from './components/feed/layout/grid-layout';
-import './index.css'
+import Layout from './components/layout/grid-layout';
 
 
 
