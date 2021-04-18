@@ -1,7 +1,25 @@
 import React, {Component} from 'react';
 import {HeaderTop, HeaderBottom } from '../header/Header';
+import FeedContent from '../feed/FeedContent';
 import './layout.css';
 
+
+function ContentSelection(props)
+{
+    const mainContent=props.content;
+    if(mainContent === 0)
+    {
+        return(
+            <FeedContent />
+        );
+    }
+    else
+    {
+        return(
+            <p>{mainContent}</p>
+        );
+    }
+}
 
 class Layout extends Component
 {
@@ -10,7 +28,7 @@ class Layout extends Component
         super(props);
         this.state=
         {
-            content:'Notifications'
+            content: 0
         }
         this.handleContent=this.handleContent.bind(this);
     }
@@ -28,12 +46,13 @@ class Layout extends Component
                 <div className='header'>
                     <HeaderTop />
                     <HeaderBottom 
-                    selected={this.state.content}
+                    selectedItem={this.state.content}
                     onNavigation={this.handleContent}
                     />
                 </div>
                 <div className='box2'>
-                    <p>{this.state.content}</p>
+                    <ContentSelection 
+                    content={this.state.content}/>
                 </div>
             </div>
         );

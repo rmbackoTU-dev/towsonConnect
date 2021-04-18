@@ -116,7 +116,7 @@ body{
     grid-row-start:2;
     grid-row-end:3;
     display:grid;
-    grid-template-columns:  60px 1fr;
+    grid-template-columns:  75px 1fr;
 }
 
 .navbox
@@ -132,19 +132,12 @@ body{
     margin-right:0;
 }
 
-.navBox > div{
+.navbox  div{
     height: 20px;
     width: 100px;
-}
-
-.linkSelected
-{
-    background-color: white;
-}
-
-.linkUnselected
-{
-    background-color: black;
+    justify-self: center;
+    align-self: center;
+    
 }
 
 .linkSelected> a
@@ -155,6 +148,6 @@ body{
 
 .linkUnselected> a
 {
-    color:ffffff;
+    color:#ffffff;
     text-decoration: currentColor;
 }

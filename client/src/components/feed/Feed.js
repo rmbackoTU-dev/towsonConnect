@@ -1,61 +1,69 @@
-//page feed
-import React, {Component, Fragment} from 'react';
-import NotifyItemList from '../notifications/NotifyItem';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSync} from '@fortawesome/fontawesome-free-solid';
-import "./feed.css"
+import React, {Component} from 'react';
 
 
 
-
-class Feed extends Component
+class Notification extends Component
 {
     constructor(props)
     {
         super(props);
         this.state={
-            notifications:[],
-            notificationCount:0,
-            updated:false
-        };
-        
+            display: {display: 'none'},
+        }
+        this.handleClick.bind(this);
     }
 
-    createnotification= (event) =>
+    handleClick(e)
     {
-         console.log("Creating!");
-         let updatedNotifications=this.state.notifications;
-         let updatedNotificationCount=this.state.notificationCount;
-         updatedNotificationCount++;
-         let notificationMessage="Hello "+updatedNotificationCount;
-         updatedNotifications.push(notificationMessage);
-         this.setState(
-             {
-                 notifications:updatedNotifications,
-                 notificationCount:updatedNotificationCount
-             }
-         );
-         console.log(this.state.notificationCount);
+        if(this.state.display.display === "none")
+        {
+            this.setState({display: {display: "block"}});
+        }
+        else
+        {
+            this.setState({display: {display: "none"}});
+        }
     }
 
-
-    render()
-    {
+    render(){
         return(
-            <div className="feed-grid-column">
-                    <div id="refreshButton">
-                        <button onClick={ this.createnotification}>
-                            <FontAwesomeIcon icon="sync" size="sm"/> Refresh Notifications
-                        </button>
-                    </div>      
-                    <div id="feed-items">
-                        <NotifyItemList notificationArray={this.state.notifications}
-                        notificationNumber={this.state.notificationCount} notificationUpdated={this.state.updated} 
-                        />
-                    </div>
+            <div className='feedItem' key={this.props.feedItemKey}>
+                <h2>this.props.header</h2>
+                <button onClick={this.handleClick} className="collapsible">
+                    {this.props.shortDescription}
+                </button>
+                <div className='long-description' style={this.state.display} >
+                    <p>{this.props.longDescription}</p>
+                    <a href={this.props.location}>Go to</a>
+                </div>
             </div>
         );
     }
 }
+
+
+
+function Feed(props)
+{
+    const notificationObjList=props.notifications;
+    notificationObjList.map( (notificationObj, index) =>
+    {
+        return(
+        <Notification
+        header={notificationObjList.header}
+        shortDescription={notificationObjList.short_description}
+        longDescription={notificationObjList.long_description}
+        location={notificationObjList.hyperlink}
+        key={notificationObjList._id} />
+        );
+    } );
+
+    return(
+    <div className='feed-items'>
+        {notificationObjList}
+    </div>
+    );
+}
+
 
 export default Feed;

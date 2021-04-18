@@ -26,6 +26,7 @@ var NotificationSchema = mongoose.Schema({
     access_token: String,
     short_description: String,
     long_description: String,
+    hyperlink:String,
     header: String
 });
 

@@ -24,30 +24,17 @@ class NavLink extends Component
         {
             super(props);
             this.handleClick=this.handleClick.bind(this);
-            this.state=
-            {
-                selected:props.isSelected
-            };
         }
 
         handleClick(e)
         {
             e.preventDefault();
-            let selected=this.state.selected;
-            if(selected)
-            {
-                this.setState({selected: false});
-            }
-            else
-            {
-                this.setState({selected:true})
-            }
-            this.props.onSelect(this.props.linkName);
+            this.props.onSelect(this.props.selectedId);
         }
 
         render()
         {
-            if(this.state.selected)
+            if(this.props.selected)
             {
                 return(
                 <div className='linkSelected'>
@@ -76,32 +63,38 @@ class HeaderBottom  extends Component
 
 
     render() {
-        const selection=this.props.selected;
-        console.log(selection);
-        if(selection ==='Courses')
+        const selection=this.props.selectedItem;
+       
+        if(selection === 0)
         {
+            console.log('Notification');
             return(
-                <div className='navBox'>
+                <div className='navbox'>
                     <NavLink linkName='Courses' href='/courses'
-                    isSelected={false}
-                    onSelect={this.props.onNavigation}/>
+                    selected={false}
+                    onSelect={this.props.onNavigation}
+                    selectedId={1}/>
                     <NavLink linkName='Notifications'href='/notifications'
-                    isSelected={true}
-                    onSelect={this.props.onNavigation} />
+                    selected={true}
+                    onSelect={this.props.onNavigation} 
+                    selectedId={0}/>
                 </div>
             );
         }
-        else if(selection === 'Notifications')
+        else if(selection === 1)
         {
-            console.log("if works");
+            console.log('Courses');
             return(
-                <div className='navBox'>
+                <div className='navbox'>
                     <NavLink linkName='Courses' href='/courses'
-                    isSelected={false}
-                    onSelect={this.props.onNavigation}/>
+                    selected={true}
+                    onSelect={this.props.onNavigation}
+                    selectedId={1}/>
                     <NavLink linkName='Notifications'href='/notifications' 
-                    isSelected={true}
-                    onSelect={this.props.onNavigation} />
+                    isSelected={false}
+                    onSelect={this.props.onNavigation}
+                    selectedId={0}
+                     />
                 </div>
             );
         }
