@@ -76,3 +76,36 @@
     box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
     padding:10px;
 }
+
+.collapsible
+{
+    border: 1px solid #000;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    padding:10px;
+}
+
+.expandIcon
+{
+    float:right;
+    size:25px;
+    margin: 2px 0px 2px auto;
+    cursor:pointer;
+}
+
+.sideBarLink
+{
+    width:65px;
+    height: 65px;
+}
+
+.highlighted
+{
+    color:#000;
+}
+
+.unhighlighted
+{
+    color:#BBB;
+}

@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {fas} from "@fortawesome/fontawesome-free-solid"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 
@@ -44,12 +47,15 @@ class Notification extends Component
         return(
             <div className='feed-item' >
                 <h2 className='notificationTitle'>{this.props.header}</h2>
-                <button onClick={this.handleClick} className="collapsible">
+                <div className="collapsible">
                     {this.props.short_description}
-                </button>
-                <div className='long-description' style={this.state.display} >
-                    <p>{this.props.long_description}</p>
-                    <a href={this.props.location}>Go to</a>
+                    <FontAwesomeIcon onClick={this.handleClick} icon={["fas", "sort-down"]} 
+                    className='expandIcon'
+                    />
+                    <div className='long-description' style={this.state.display} >
+                        <p>{this.props.long_description}</p>
+                        <a href={this.props.location}>Go to</a>
+                    </div>
                 </div>
             </div>
         );

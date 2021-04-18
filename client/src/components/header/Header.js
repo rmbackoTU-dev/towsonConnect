@@ -7,7 +7,7 @@ const HeaderTop=() =>
         <Fragment>
             <div className='header-top'>
                 <div className='logo-icon'>
-                <img src={process.env.PUBLIC_URL +'/towson-branded-logos/TowsonUlogo-horiz-color-rev_logoSize.png'}
+                    <img src={process.env.PUBLIC_URL +'/towson-branded-logos/TowsonU_ConnectLogo.png'}
                         alt='Towson University Logo'
                         className='towsonLogo'/>
                 </div>

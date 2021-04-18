@@ -1,3 +1,4 @@
+
 @font-face {
     font-family:"proxima-nova";
     src:url("https://use.typekit.net/af/d45b9a/000000000000000077359577/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3") 
@@ -9,20 +10,13 @@
     font-display:auto;font-style:normal;font-weight:400;
     }
 
-
 head{
     margin:0;
 }
 
 body{
     margin:0;
-    font-family: proxima-nova;
-}
-
-.towsonLogo 
-{
-    height: '53px';
-    width:'160px';
+    
 }
 
 .wrapper  {
@@ -33,7 +27,7 @@ body{
     margin:0;
 }
 
-.header {
+.box1 {
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start:1;
@@ -45,7 +39,7 @@ body{
 
 }
 
-.header-top{
+.box1-top {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start:1;
@@ -59,10 +53,9 @@ body{
 {
     grid-column-start: 1;
     grid-column-end: 2;
-    display:flex;
 }
 
-.accountFlex
+.login-flex
 {
     grid-column-start: 2;
     grid-column-end: 3;
@@ -127,7 +120,85 @@ body{
     grid-row-start:2;
     grid-row-end:3;
     display:grid;
-    grid-template-columns:  75px 1fr;
+    grid-template-columns:  60px 1fr;
+}
+
+.sideBar
+{
+    grid-column-start:1;
+    grid-column-end: 2;
+    grid-row-start:1;
+    grid-row-end:3;
+}
+
+.sideBar > img
+{
+    margin: 5px 5px 5px 5px; 
+}
+
+.feedbox {
+    grid-column-start: 2;
+    grid-column-end: end;
+    grid-row-start:1;
+    grid-row-end:3;
+    display:grid;
+    grid-template-columns: 256px 1fr;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    border: 1px solid #BBB
+}
+
+.left-feed
+{
+    background:#E7E5E0;
+    
+}
+
+.course_list 
+{
+    list-style-type:none;
+    font-weight: bold;
+}
+
+.course_list > li > a:link
+{
+    text-decoration:none;
+}
+
+.right-feed
+{
+    background: #ffffff;
+    /* margin: 0 0 0 280px; */
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    border-left: 1px solid #BBB;
+    z-index: 10;
+    
+}
+
+.notificationTitle
+{
+    border-bottom: 1px solid #BBB;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+   
+}
+
+.feed-items
+{
+    margin: 5px 25px 15px 25px;
+}
+
+.feed-item
+{
+    border: 1px solid #BBB;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    padding:10px;
 }
 
 .navbox
@@ -143,22 +214,20 @@ body{
     margin-right:0;
 }
 
-.navbox  div{
+.nav-link{
     height: 20px;
     width: 100px;
-    justify-self: center;
-    align-self: center;
-    
 }
 
-.linkSelected> a
+
+.nav-link> a:hover
 {
     color:#ffe864;
     text-decoration: currentColor;
 }
 
-.linkUnselected> a
+.nav-link> a
 {
-    color:#ffffff;
+    color:ffffff;
     text-decoration: currentColor;
 }
