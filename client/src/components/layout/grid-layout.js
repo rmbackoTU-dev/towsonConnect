@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {HeaderTop, HeaderBottom } from '../header/Header';
 import FeedContent from '../feed/FeedContent';
+import CourseList from '../course-list/CourseList';
 import './layout.css';
 
 
@@ -16,7 +17,7 @@ function ContentSelection(props)
     else
     {
         return(
-            <p>{mainContent}</p>
+            <CourseList />
         );
     }
 }
