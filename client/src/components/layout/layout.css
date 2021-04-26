@@ -10,22 +10,13 @@
     }
 
 
-head{
-    margin:0;
-}
-
-body{
-    margin:0;
-    font-family: proxima-nova;
-}
-
 .towsonLogo 
 {
     height: '53px';
     width:'160px';
 }
 
-.wrapper  {
+.layout_wrapper  {
     display : grid;
     grid-template-columns: 128px repeat(2, 1fr);
     grid-auto-rows: 100px 1fr;
@@ -33,7 +24,7 @@ body{
     margin:0;
 }
 
-.header {
+.content_header {
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start:1;

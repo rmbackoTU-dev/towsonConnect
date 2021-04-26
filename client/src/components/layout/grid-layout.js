@@ -47,8 +47,8 @@ class Layout extends Component
     render()
     {
         return(
-            <div className="wrapper">
-                <div className='header'>
+            <div className="content_wrapper">
+                <div className='content_header'>
                     <HeaderTop />
                     <HeaderBottom 
                     selectedItem={this.state.content}

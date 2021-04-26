@@ -75,10 +75,13 @@ body {
   font-family:proxima-nova;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
-h1
-{
-  font-family: proxima-nova;
-  font-style: bold italic;
+head{
+  margin:0;
 }
+
+
+
+
