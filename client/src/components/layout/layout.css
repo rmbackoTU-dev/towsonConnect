@@ -119,15 +119,22 @@ body{
     margin:2px auto 0px auto;
 }
 
-
-
-.box2 {
+.feedWrapper {
     grid-column-start: 1;
     grid-column-end: end;
     grid-row-start:2;
     grid-row-end:3;
     display:grid;
     grid-template-columns:  75px 1fr;
+}
+
+.outerCourseWrapper {
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start:2;
+    grid-row-end:3;
+    display: flex;
+    justify-content: center;
 }
 
 .navbox

@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import axios from 'axios'
+import './courseList.css'
 
 function CourseItem(props)
 {
@@ -74,8 +75,11 @@ class CourseList extends Component
         });
 
         return(
-            <div className='CourseListWrapper'>
-                <ul className='CourseList'>
+            <div className='courseListWrapper'>
+                <div className='courseHeaderDiv'>
+                    <h2>Your Courses:</h2>
+                </div>
+                <ul className='courseList'>
                     {courseItemList}
                 </ul>
             </div>

@@ -1,0 +1,27 @@
+.courseItem
+{
+    list-style: none;
+}
+
+
+
+.courseListWrapper
+{
+    display: inline-block;
+    border: 1px black solid;
+    width:40%;
+    margin: 40px auto;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+}
+
+.courseHeaderDiv
+{
+    border: 1px black solid;
+    background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+}
+
+.courseHeaderDiv >h2{
+    color:white;
+}

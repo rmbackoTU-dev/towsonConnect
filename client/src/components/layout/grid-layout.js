@@ -11,13 +11,17 @@ function ContentSelection(props)
     if(mainContent === 0)
     {
         return(
-            <FeedContent />
+            <div className='feedWrapper'>
+                <FeedContent />
+            </div>
         );
     }
     else
     {
         return(
-            <CourseList />
+            <div className='outerCourseWrapper'>
+                <CourseList />
+            </div>
         );
     }
 }
@@ -51,10 +55,8 @@ class Layout extends Component
                     onNavigation={this.handleContent}
                     />
                 </div>
-                <div className='box2'>
-                    <ContentSelection 
-                    content={this.state.content}/>
-                </div>
+                <ContentSelection 
+                content={this.state.content}/>
             </div>
         );
     }
