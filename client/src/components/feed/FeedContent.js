@@ -17,11 +17,17 @@ class FeedContent extends Component
             selectedCourse:'All'
         }
         this.categoryChangeListener=this.categoryChangeListener.bind(this);
+        this.courseChangeListener=this.courseChangeListener.bind(this);
     }
 
     categoryChangeListener(category)
     {
         this.setState({selectedCategory: category});
+    }
+
+    courseChangeListener(courseName)
+    {
+        this.setState({selectedCourse:courseName});
     }
 
     render()
@@ -65,7 +71,7 @@ class FeedContent extends Component
                 <div className='feedbox'>
                     <div className='left-feed'>
                         <CourseFeedSelector 
-                        doNotQuery={true}
+                        onCourseChange={this.courseChangeListener}
                         />
                     </div>
                     <div className='feed-items'>

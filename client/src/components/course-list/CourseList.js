@@ -69,7 +69,7 @@ class CourseList extends Component
                 <CourseItem
                 key={item.id}
                 courseName={item.name}
-                courseInstructor={item.teacher}
+                teacherName={item.teacher}
                 courseLink={item.link} />
             );
         });
