@@ -1,13 +1,17 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var cors=require('cors');
 
 var app = express();
 var port = process.env.PORT || 8080;
+
+console.log("Setting up");
 
 // access the .env file
 require('dotenv/config');
 
 // parses the body into JSON
+app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -27,6 +31,7 @@ app.use('/notifications', notificationsRoute);
 
 // Default route
 app.get('/', (req, res) => {
+    console.log("Site Operational");
     res.send('Default Page');
 });
 

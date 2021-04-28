@@ -21,7 +21,7 @@ const handleErrors = (err) => {
         return errors;
     }
 
-    // duplicate error handel...
+    // duplicate error handle...
     if(err.code === 11000) {
         if(err.keyPattern.userName === 1) {
             errors.userName = "This UserName has been taken. Try another one.";
@@ -82,11 +82,13 @@ router.post('/', async (req, res) => {
 // Signup route
 router.post('/signup', async( req, res) => {
     // Get data from req.body
-    const { userName, email, password, userType } = req.body;
-    console.log(userType);
+    const { userName, email, password } = req.body;
 
     try {
-        const user = await User.create({ userName, email, password, userType }); // Creating new user...
+        console.log("The user name is "+userName);
+        console.log("The password is "+password);
+        console.log("The email is "+email);
+        const user = await User.create({ userName, email, password}); // Creating new user...
         console.log("User Created successfully...");
         res.status(201).json({ status: "success", userId: user._id }); 
     } 
@@ -100,7 +102,8 @@ router.post('/signup', async( req, res) => {
 // Login route
 router.post('/login', async (req, res) => {
     const {userNameOrEmail, password} = req.body; // Getting the data from the frontend using body-parser...
-
+     console.log("UsernameOrEmail "+userNameOrEmail);
+     console.log("password "+password);
     try {
         const user = await User.login(userNameOrEmail, password);  // Login the user using Statics function of User data model...
         res.status(200).json({ status: "success", user: user._id });  

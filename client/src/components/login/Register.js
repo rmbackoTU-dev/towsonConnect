@@ -8,7 +8,7 @@ export default class Register extends Component {
     userName: "",
     email: "",
     password: "",
-    userType: "",
+    // userType: "",
   };
 
   handleChange = (event) => {
@@ -28,11 +28,12 @@ export default class Register extends Component {
       userName: this.state.userName,
       email: this.state.email,
       password: this.state.password,
-      userType: this.state.userType
+      // userType: this.state.userType
     };
+    console.log("Submitting: "+JSON.stringify(payload));
 
     axios({
-      url: "/authentication/signup",
+      url: "http://localhost:8080/users/signup",
       method: "POST",
       data: payload,
     })
@@ -42,7 +43,7 @@ export default class Register extends Component {
 
         if (res.data.status === "success") {
           alert("Success");
-          this.props.history.push("/success");
+          this.props.history.push("/content");
         } else {
           if (res.data.errors.userName.length > 0) {
             alert(res.data.errors.userName);
@@ -50,12 +51,11 @@ export default class Register extends Component {
             alert(res.data.errors.email);
           } else if (res.data.errors.password.length) {
             alert(res.data.errors.password);
-          } else if (res.data.errors.userType.length) {
-            alert(res.data.errors.userType) 
           }
-        }
-      })
-      .catch((err) => {
+          // } else if (res.data.errors.userType.length) {
+          //   alert(res.data.errors.userType) 
+          // }
+      }}).catch((err) => {
         console.log("Internal server error");
         alert("Internal Server Error. Please try again.");
         console.log(err);
@@ -118,8 +118,7 @@ export default class Register extends Component {
                 />
               </div>
               <a href="#">Forgot Password?</a>
-
-              <div className="form-group">
+              {/* <div className="form-group">
                 <div className="btn-group">
                   <select
                     className="form-control btn-shadow"
@@ -132,8 +131,7 @@ export default class Register extends Component {
                     <option value="Teacher">Teacher</option>
                   </select>
                 </div>
-              </div>
-
+              </div> */}
               <button className="btn btn-primary btn-block">Submit</button>
             </form>
             <br />

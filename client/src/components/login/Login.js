@@ -27,23 +27,23 @@ export default class Login extends Component {
     event.preventDefault();
 
     const payload = {
-      userNameOremail: this.state.userNameOremail,
+      userNameOrEmail: this.state.userNameOrEmail,
       password: this.state.password,
     }; 
+    console.log("Submitting: "+JSON.stringify(payload));
 
     axios({
-      url: "/authentication/login",
+      url: "http://localhost:8080/users/login",
       method: "POST",
       data: payload
     })
       .then((res) => {
-
         console.log("Success");
         console.log(res);
 
         if(res.data.status === "success") {
             alert("Success")
-            this.props.history.push("/success")
+            this.props.history.push("/content")
         } else {
             if(res.data.errors.userName.length > 0) {
                 alert("UserName or Email not found. Please consider Signup.")
@@ -59,6 +59,7 @@ export default class Login extends Component {
         alert("Internal Server Error. Please try again.");
         console.log(err);
       });
+
   };
   render() {
     console.log("state: ", this.state);
@@ -83,8 +84,8 @@ export default class Login extends Component {
               <div className="form-group">
                 <input
                   type="text"
-                  name="userNameOremail"
-                  value={this.state.userNameOremail}
+                  name="userNameOrEmail"
+                  value={this.state.userNameOrEmail}
                   onChange={this.handleChange}
                   className="form-control"
                   id="exampleInputEmail1"

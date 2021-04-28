@@ -14,7 +14,7 @@ var UserSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, "Please Enter Your Email."],
-        unique: [true, "This email is alredy reistrated. Please consider login."],
+        unique: [true, "This email is alredy registered. Please consider login."],
         lowercase: true,
         validate: [isEmail, "Please Enter a Valid Email"]
     },
@@ -22,10 +22,6 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: [true, "Please enter a valid password"],
         minlength: [6, "Length must be greated than 6"]
-    },
-    role: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Role'
     },
     created_at: {
         type: Date,
