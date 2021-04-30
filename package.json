@@ -4,7 +4,9 @@
   "description": "Towson Connect is a collaborative web application for Towson Teachers and students, developed for COSC 617: Advance Web Development. The application combines message boards and media spaces to provide an area where users can communicate, share, and grade files.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "start": "node server/index.js ",
+     "heroku-postbuild":"cd client && npm install && npm run build",
+     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,8 @@
   "homepage": "https://github.com/rmbackoTU-dev/towsonConnect#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
-    "body-parser": "^1.19.0"
+    "body-parser": "^1.19.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
   }
 }
