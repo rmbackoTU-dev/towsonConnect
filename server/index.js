@@ -10,7 +10,6 @@ console.log("Setting up");
 // access the .env file
 dotenv.config();
 var port = process.env.PORT || 8080;
-console.log('Contents:'+process.env.DB_CONNECTION+" \n PORT "+port);
 // parses the body into JSON
 app.use(cors());
 app.use(express.urlencoded({extended: true}));

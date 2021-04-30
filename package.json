@@ -4,7 +4,7 @@
   "description": "Towson Connect is a collaborative web application for Towson Teachers and students, developed for COSC 617: Advance Web Development. The application combines message boards and media spaces to provide an area where users can communicate, share, and grade files.",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && node index.js",
+    "start": "cd server && npm install && node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
