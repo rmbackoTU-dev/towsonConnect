@@ -33,7 +33,7 @@ export default class Login extends Component {
     console.log("Submitting: "+JSON.stringify(payload));
 
     axios({
-      url: "http://localhost:8080/users/login",
+      url: "https://limitless-mountain-55127.herokuapp.com/users/login",
       method: "POST",
       data: payload
     })
