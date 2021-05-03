@@ -20,6 +20,9 @@ var usersRoute = require('./routes/users');
 var messagesRoute = require('./routes/messages');
 var threadsRoute = require('./routes/threads');
 var notificationsRoute = require('./routes/notifications');
+var courses=require("./routes/courses");
+var teacher=require("./routes/teachercourselist");
+var student=require("./routes/students");
 
 var Role = require('./models/Role');
 
@@ -28,6 +31,9 @@ app.use('/users', usersRoute);
 app.use('/messages', messagesRoute);
 app.use('/threads', threadsRoute);
 app.use('/notifications', notificationsRoute);
+app.use("/courses",courses);
+app.use("/teacher",teacher);
+app.use("/student",student);
 
 // Default route
 app.get('/', (req, res) => {
