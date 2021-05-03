@@ -1,4 +1,5 @@
 var express = require('express');
+const { update } = require('../models/Course');
 var router = express.Router();
 
 var Course=require("../models/Course");
@@ -27,5 +28,6 @@ router.post("/",async(req,res)=>{
     }
 
 })
+
 
 module.exports = router;
