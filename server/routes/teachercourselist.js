@@ -28,6 +28,7 @@ router.post("/",async(req,res)=>{
     try{
         var savedTeacher = await newTeacher.save();
         res.json(savedTeacher);
+        console.log("Sent: "+JSON.stringify(savedTeacher));
     } catch (err) {
         res.json({ message: err });
     }
