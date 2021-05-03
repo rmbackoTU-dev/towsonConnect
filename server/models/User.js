@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var { isEmail } = require('validator');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 // define User schema for Mongoose operations
 var UserSchema = mongoose.Schema({

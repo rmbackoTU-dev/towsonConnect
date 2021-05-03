@@ -4,12 +4,12 @@
   "description": "Backend files for Towson Connect project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "npm install & node index.js"
   },
   "author": "Christopher Cox",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

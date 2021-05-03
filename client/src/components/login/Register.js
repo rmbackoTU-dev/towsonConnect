@@ -33,7 +33,7 @@ export default class Register extends Component {
     console.log("Submitting: "+JSON.stringify(payload));
 
     axios({
-      url: "http://localhost:8080/users/signup",
+      url: "https://limitless-mountain-55127.herokuapp.com/users/signup",
       method: "POST",
       data: payload,
     })

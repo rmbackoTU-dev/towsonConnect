@@ -1,15 +1,15 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var cors=require('cors');
-
+const dotenv=require("dotenv");
 var app = express();
-var port = process.env.PORT || 8080;
+
 
 console.log("Setting up");
 
 // access the .env file
-require('dotenv/config');
-
+dotenv.config();
+var port = process.env.PORT || 8080;
 // parses the body into JSON
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -20,6 +20,9 @@ var usersRoute = require('./routes/users');
 var messagesRoute = require('./routes/messages');
 var threadsRoute = require('./routes/threads');
 var notificationsRoute = require('./routes/notifications');
+var courses=require("./routes/courses");
+var teacher=require("./routes/teachercourselist");
+var student=require("./routes/students");
 
 var Role = require('./models/Role');
 
@@ -28,6 +31,9 @@ app.use('/users', usersRoute);
 app.use('/messages', messagesRoute);
 app.use('/threads', threadsRoute);
 app.use('/notifications', notificationsRoute);
+app.use("/courses",courses);
+app.use("/teacher",teacher);
+app.use("/student",student);
 
 // Default route
 app.get('/', (req, res) => {
