@@ -27,6 +27,35 @@ router.post("/",async(req,res)=>{
         res.json({ message: err });
     }
 
+});
+
+router.patch("/", async(req, res) =>{
+
+    var course=req.body;
+    var idToUpdate=course._id;
+    console.log("Trying: "+idToUpdate+"\n "+JSON.stringify(course));
+    try
+    {
+        var courseToUpdate=await Course.findOne({_id:idToUpdate});
+        console.log("Completed Find\n Found: "+JSON.stringify(courseToUpdate));
+
+        if(courseToUpdate)
+        {
+            let newTeacherField=course.Teacher;
+            let updatedCourse=await courseToUpdate.updateOne({"Teacher": newTeacherField});
+            console.log("Patching "+JSON.stringify(updatedCourse));
+            res.json(updateCourse);
+        }
+        else
+        {
+            console.log("Unable to patch");
+            res.json({message:"Unable to patch"});
+        }
+    }
+    catch(err)
+    {
+        res.json({message:err});
+    }
 })
 
 
