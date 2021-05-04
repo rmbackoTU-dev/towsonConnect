@@ -67,37 +67,231 @@ class CourseFeedSelector extends Component
         return(this.props.onCourseChange(selectedCourseName));
     }
 
-    componentDidMount= () =>
+    componentDidMount()
     {
-        //Do axios logic here
-        const backendURL=
+        //Setup the user id and type
+        const userId=this.props.userId;
+        const userType=this.props.userType;
+        console.log("Course selector got user id "+userId);
+        console.log("Course selector got user type "+userType);
+        if(userType === "Teacher")
         {
-            url:'https://jsonplaceholder.typicode.com/comments',
-            method: 'get',
-            headers:
+            console.log("Doing Teacher Axios Request: ");
+            const teacherURL=
             {
-                'Content-Type':'application/json'
-            }
-        }
-        axios(backendURL).then((response) =>
-        {
-            const coursesData=response.data;
-            let allCourses=Array();
-            for(let i=0; i< 10; i++)
-            {
-                let course={
-                    id: coursesData[i].id,
-                    name: coursesData[i].name,
-                    teacher:coursesData[i].email,
+                url:"http://localhost:8080/teacher/"+userId,
+                method:"get",
+                headers:
+                {
+                    'Content-Type':'application/json'
                 }
-                allCourses.push(course);
-                console.log("Got Course :"+allCourses[i].name)
-            }
-            this.setState({courseList:allCourses});
-        }).catch((err) =>
+            };
+            axios(teacherURL).then((response) => {
+                 let studentData=response.data;
+                 console.log("Student data is: "+JSON.stringify(studentData));
+                 const courses=studentData.course;
+                 console.log("Courses are: "+JSON.stringify(courses));
+                 const coursesURL=
+                 {
+                     url:'http://localhost:8080/courses/',
+                     method: 'get',
+                     headers:
+                     {
+                         'Content-Type':'application/json'
+                     }
+                 }
+ 
+                 axios(coursesURL).then((response) =>
+                 {
+                     const coursesData=response.data;
+                     var allCourses=Array();
+                     courses.forEach((course, index) =>
+                     {
+                         const courseId=course._id;
+                         console.log("Currently on course "+index);
+                         coursesData.forEach((courseFromBackend) =>
+                         {
+                             if(courseId === courseFromBackend._id)
+                             {
+                                 const courseName=courseFromBackend.subjectDesignator+
+                                 courseFromBackend.courseNum;
+                                 let teacherName=userId
+                                 let currentCourse=
+                                    {
+                                        id: courseId,
+                                        name: courseName,
+                                        teacher:teacherName,
+                                    }
+                                    console.log("Pushing "+JSON.stringify(currentCourse));
+                                    allCourses.push(currentCourse); 
+                                 
+                             }
+                         });
+                         //fill the users names afterwards so all the data is in the list
+                         const userEndpoint=
+                         {
+                            url: "http://localhost:8080/users/"+userId,
+                            method:'get',
+                            headers:
+                            {
+                                'Content-Type':'application/json'
+                            }
+                         };
+                         axios(userEndpoint).then((result) => 
+                         {          
+                            const userData=result.data;
+                            console.log("From user endpoint: "+JSON.stringify(userData));
+                            const teacherName=userData.userName;
+                            allCourses.forEach((course, inPlaceIndex) =>
+                            {
+                                let currentCourse=
+                                {
+                                    id: course.id,
+                                    name: course.name,
+                                    teacher:teacherName,
+                                }
+                                console.log("Pushing "+JSON.stringify(currentCourse));
+                                allCourses[inPlaceIndex]=currentCourse;
+                            });
+                            console.log("Setting course list state");
+                            this.setState({courseList: allCourses});
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                        
+                     });
+                }).catch((err) =>
+                {
+                    console.log(err)
+                });   
+            }).catch((err) =>
+            {
+                console.log(err)
+            });         
+        }
+        else if(userType ==="Student")
         {
-            console.log(err)
-        });
+
+            //Attempting to get a single user object
+            console.log("Doing Student Axios Request");
+            const studentURL=
+            {
+                url:"http://localhost:8080/student/"+userId,
+                method:"get",
+                headers:
+                {
+                    'Content-Type':'application/json'
+                }
+            };
+            axios(studentURL).then((response) => {
+                let studentData=response.data;
+                console.log("Student data is: "+JSON.stringify(studentData));
+                const courses=studentData.course;
+                console.log("Courses are: "+JSON.stringify(courses));
+                const coursesURL=
+                {
+                    url:'http://localhost:8080/courses/',
+                    method: 'get',
+                    headers:
+                    {
+                        'Content-Type':'application/json'
+                    }
+                }
+
+                axios(coursesURL).then((response) =>
+                {
+                    const coursesData=response.data;
+                    var allCourses=Array();
+                    courses.forEach((course, index) =>
+                    {
+                        const courseId=course._id;
+                        
+                        console.log("Currently on course "+index);
+                        coursesData.forEach((courseFromBackend) =>
+                        {
+                            if(courseId === courseFromBackend._id)
+                            {
+                                const courseName=courseFromBackend.subjectDesignator+
+                                    courseFromBackend.courseNum;
+                                let teacherID=courseFromBackend.Teacher;
+                                let teacherName="";
+                                if(teacherID == null)
+                                {
+                                    teacherName="unassigned";
+                                    
+                                    let currentCourse=
+                                    {
+                                        id: courseFromBackend._id,
+                                        name: courseName,
+                                        teacher:teacherName,
+                                    }
+                                    allCourses.push(currentCourse);
+                                    console.log("index is "+index);
+                                    console.log("Got Course :"+allCourses[index].name);
+                                }
+                                else
+                                {
+                                    teacherName=teacherID;
+                                    
+                                    let currentCourse=
+                                    {
+                                        id: courseFromBackend._id,
+                                        name: courseName,
+                                        teacher:teacherName,
+                                    };
+                                    allCourses.push(currentCourse);
+                                    console.log("index is "+index);
+                                    console.log("Got Course :"+allCourses[index].name)
+                                }
+                            }
+                        }
+                        );
+                    });
+                    //fill the users names afterwards so all the data is in the list
+
+                    allCourses.forEach((course, inPlaceIndex) =>
+                    {
+                        if(course.teacher !== "unassigned")
+                        {
+                            let teacherID=course.teacher;
+                            const userEndpoint=
+                            {
+                                url: "http://localhost:8080/users/"+teacherID,
+                                method:'get',
+                                headers:
+                                {
+                                    'Content-Type':'application/json'
+                                }
+                            }
+                            axios(userEndpoint).then((result) => 
+                            {
+                    
+                                const userData=result.data;
+                                console.log("From user endpoint: "+JSON.stringify(userData));
+                                const teacherName=userData.userName;
+                                let currentCourse=
+                                {
+                                    id: course.id,
+                                    name: course.name,
+                                    teacher:teacherName,
+                                }
+                                allCourses[inPlaceIndex]=currentCourse
+                                
+                            }).catch((err) => {
+                                console.log(err);
+                            });
+                        }
+                        console.log("Setting course list state");
+                        this.setState({courseList: allCourses});
+                    });   
+                }).catch((err) =>
+                {
+                    console.log(err)
+                });
+            }).catch((err)=> {
+                console.log(err);
+            });
+        }   
     }
 
     render()

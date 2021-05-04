@@ -12,7 +12,9 @@ function ContentSelection(props)
     {
         return(
             <div className='feedWrapper'>
-                <FeedContent />
+                <FeedContent
+                userId={props.userId}
+                userType={props.userType} />
             </div>
         );
     }
@@ -20,7 +22,9 @@ function ContentSelection(props)
     {
         return(
             <div className='outerCourseWrapper'>
-                <CourseList />
+                <CourseList 
+                userId={props.userId}
+                userType={props.userType}/>
             </div>
         );
     }
@@ -33,10 +37,13 @@ class Layout extends Component
         super(props);
         this.state=
         {
-            content: 0
+            content: 0,
+            userId:this.props.location.state.userId,
+            userType:this.props.location.state.userType
         }
         this.handleContent=this.handleContent.bind(this);
     }
+
 
     handleContent(page)
     {
@@ -46,6 +53,8 @@ class Layout extends Component
 
     render()
     {
+        console.log("The user id for this user is "+this.state.userId);
+        console.log("The user type for this user is "+this.state.userType);
         return(
             <div className="content_wrapper">
                 <div className='content_header'>
@@ -56,7 +65,9 @@ class Layout extends Component
                     />
                 </div>
                 <ContentSelection 
-                content={this.state.content}/>
+                content={this.state.content}
+                userId={this.state.userId}
+                userType={this.state.userType}/>
             </div>
         );
     }

@@ -14,7 +14,9 @@ class FeedContent extends Component
         this.state=
         {
             selectedCategory: 'Notifications',
-            selectedCourse:'All'
+            selectedCourse:'All',
+            userId:this.props.userId,
+            userType:this.props.userType
         }
         this.categoryChangeListener=this.categoryChangeListener.bind(this);
         this.courseChangeListener=this.courseChangeListener.bind(this);
@@ -71,6 +73,8 @@ class FeedContent extends Component
                 <div className='feedbox'>
                     <div className='left-feed'>
                         <CourseFeedSelector 
+                        userId={this.state.userId}
+                        userType={this.state.userType}
                         onCourseChange={this.courseChangeListener}
                         />
                     </div>

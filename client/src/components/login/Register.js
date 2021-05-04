@@ -80,7 +80,15 @@ class Register extends Component {
   {
     if(result)
     {
-      this.props.history.push("/content");
+      const contentpage=
+      {
+        pathname: "/content",
+        state:{
+          userId:this.state.userId,
+          userType:this.state.userType
+        }
+      }
+      this.props.history.push(contentpage);
     }
     else
     {

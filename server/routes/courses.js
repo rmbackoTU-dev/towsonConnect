@@ -8,7 +8,7 @@ var Course=require("../models/Course");
 router.get("/",async(req,res)=>{
     
     try{
-        var allCourse = await Course.find();
+        var allCourse = await Course.find().populate('course');
         res.json(allCourse);
     } catch (err) {
         res.json({ message: err });
