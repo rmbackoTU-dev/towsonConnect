@@ -44,7 +44,7 @@ router.patch("/", async(req, res) =>{
             let newTeacherField=course.Teacher;
             let updatedCourse=await courseToUpdate.updateOne({"Teacher": newTeacherField});
             console.log("Patching "+JSON.stringify(updatedCourse));
-            res.json(updateCourse);
+            res.json(updatedCourse);
         }
         else
         {

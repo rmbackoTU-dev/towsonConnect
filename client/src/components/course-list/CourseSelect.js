@@ -16,14 +16,31 @@ class CourseCheckBox extends Component
     toggleCheckBoxChange()
     {
         const isChecked=this.state.checked;
-        this.setState({checked:!isChecked});
-        this.props.onChange(this.props.index)
+        console.log(isChecked);
+        this.setState(({checked}) =>
+        (
+            {
+                checked: !checked,
+            }
+        ));
+        const newState=!(isChecked);
+        console.log(newState);
+        if(newState)
+        {
+            console.log("Checked")
+            this.props.onChange(this.props.value, "add");
+        }
+        else
+        {
+            console.log("Unchecked");
+            this.props.onChange(this.props.value, "remove");
+        }
     }
 
     render()
     {
         const  isChecked=this.state.checked;
-        const itemIndex=this.props.index;
+        const itemValue=this.props.value;
         const courseDescription=this.props.label;
         return(
             <div className="checkbox">
@@ -31,8 +48,9 @@ class CourseCheckBox extends Component
                         {courseDescription}
                         <input
                             type="checkbox"
-                            value={itemIndex}
+                            value={itemValue}
                             checked={isChecked}
+                            onChange={this.toggleCheckBoxChange}
                         />
                     </label>
             </div>
@@ -134,81 +152,187 @@ class CourseSelect extends Component
             
     }
 
-    onSubmit(values)
+    onSubmit(event)
     {
+        event.preventDefault();
+        let values=this.state.coursesSelected;
         let idList=new Array(values.length);
         let userId=this.props.userId;
         for(let i=0; i< values.length; i++)
         {
-            let currentId=values._id;
-            idList.push(currentId);
+             let currentId=values[i];
+             idList.push(currentId);
+             console.log("pushing "+currentId);
         }
-        let performRequest=async (requestObj) => 
+        let currentCourse=this.state.coursesToList;
+        let limitedList=new Array(idList.length);
+        let courseIDData=""
+        currentCourse.forEach((course) =>
         {
-            axios(requestObj).then((res) => {
+            let courseID=course._id;
+            for(let j=0; j<idList.length; j++)
+            {
+                if(courseID === idList[j])
+                {
+                    console.log("Match!")
+                    limitedList.push(course);
+                    //create an id list for the teachers endpoint
+                    if(courseIDData ==="")
+                    {
+                        courseIDData=idList[j];
+                    }
+                    else
+                    {
+                        courseIDData=courseIDData+","+idList[j];
+                    }
+                }
+                else
+                {
+                    console.log("No Match");
+                }
+            }
+        });
+        if(this.state.role === "Teacher")
+        {
+            let teachersPostEndpoint=
+                    {
+                        url: "http://localhost:8080/teacher/",
+                        method: 'post',
+                        data:{
+                            "userId":userId,
+                            "course":courseIDData
+                        }
+                    }
+                    console.log("Queing teacher post. ");
+                    axios(teachersPostEndpoint).then((res) => {
+                        const responseData=res.data
+                        console.log(responseData);
+                        this.setState({success:true});
+                    
+                    }).catch((err) => 
+                    {
+                        console.log(err);
+                        this.setState({success:false});
+                    })
+        }
+        else if(this.state.role === "Student")
+        {
+            let studentsPostEndpoint=
+                    {
+                        url: "http://localhost:8080/student/",
+                        method: 'post',
+                        data:{
+                            "userId":userId,
+                            "course":courseIDData
+                        }
+                    }
+            console.log("Queing student post. ");
+            axios(studentsPostEndpoint).then((res) => {
                 const responseData=res.data
                 console.log(responseData);
                 this.setState({success:true});
-                
+                    
             }).catch((err) => 
             {
                 console.log(err);
                 this.setState({success:false});
             })
         }
-        for(let j=0; j< idList.length; j++)
+        limitedList.forEach((course) =>
         {
-            let currentId=idList[j];
-            let currentCourse=this.state.coursesToList[currentId];
-            console.log("Current course is: "+JSON.stringify(currentCourse));
+            let newCourse={
+                _id:0,
+            };
             if(this.state.role === "Teacher")
             {
-                /*call the code to both post to teacher
-                *and patch teacher.
-                */
-                let coursesPatchEndpoint=
+                console.log("Modifying: \n"+
+                JSON.stringify(course));
+                newCourse=
                 {
-                    url: "http://localhost:8080/courses/",
-                    method: 'patch',
-                    data:currentCourse
-                }
-                let teachersPostEndpoint=
-                {
-                    url: "http://localhost:8080/teachers/",
-                    method: 'post',
-                    data:{
-                        "userId":userId,
-                        "course":currentCourse
+                    _id:course._id,
+                    courseName:course.courseName,
+                    subjectDesignator:course.subjectDesignator,
+                    courseNum:course.courseNum,
+                    Teacher:userId
+                } 
+                console.log("Attempting to add: \n"+
+                JSON.stringify(newCourse));
+                    /*call the code to both post to teacher
+                    *and patch teacher.
+                    */
+                    let coursesPatchEndpoint=
+                    {
+                        url: "http://localhost:8080/courses/",
+                        method: 'patch',
+                        data:newCourse
                     }
-                }
-                console.log("Queing teacher post. ");
-                performRequest(teachersPostEndpoint);
-                console.log("Queing course update. ");
-                performRequest(coursesPatchEndpoint);
+                    console.log("Queing course update. ");
+                    axios(coursesPatchEndpoint).then((res) => {
+                        const responseData=res.data
+                        console.log(responseData);
+                        this.setState({success:true});
+                    }).catch((err) => 
+                    {
+                        console.log(err);
+                        this.setState({success:false});
+                    })
             }
-            console.log("Unloading all request");
-        }
+            
+            
+           
+        });
+        console.log("Unloading all request");
+        this.props.onFormSubmit(this.state.success);
+        
     }
 
-    onSelectedChange(indexNum)
+    onSelectedChange(idNum, change)
     {
-        var currentListOfCourses=this.state.coursesSelected;
-        currentListOfCourses.push(indexNum);
-        this.setState({coursesSelected: currentListOfCourses });
+        if(change === "add")
+        {
+            var currentListOfCourses=this.state.coursesSelected;
+            currentListOfCourses.push(idNum);
+            this.setState({coursesSelected: currentListOfCourses });   
+        }
+        else if(change === "remove")
+        {
+            var currentCourseList=this.state.coursesSelected;
+            var newCourseList=Array();
+            for(let k=0; k< currentCourseList.length; k++)
+            {
+                let currentCourse=currentCourseList[k];
+                if(idNum !== currentCourse)
+                {
+                    newCourseList.push(currentCourse);               
+                }
+                else{
+                    console.log("Unselecting :"+currentCourse)
+                }
+            }
+            this.setState({coursesSelected: newCourseList});
+        }
     }
 
     render()
     {
-
+        let currentCourseList=this.state.coursesSelected;
+        console.log("Courses in current course list");
+        for(let x=0; x<currentCourseList.length; x++)
+        {
+            console.log("Course "+x+" index num "+currentCourseList[x]);
+        }
         const courseList=this.state.coursesToList;
         var courseCheckBoxes=courseList.map((course, index) =>
             {
                 let courseDesignator=course.subjectDesignator+" "+course.courseNum;
-               
-               return( <CourseCheckBox
+                let courseLabel=courseDesignator+": "+course.courseName;
+                let courseValue=course._id;
+            return( <CourseCheckBox
                 index={index}
-                
-                label={courseDesignator}
+                onChange={this.onSelectedChange}
+                label={courseLabel}
+                value={courseValue}
+                key={courseDesignator}
                 />
                 );
             }
@@ -216,12 +340,16 @@ class CourseSelect extends Component
 
         return(
             <div className="courseSelector">
-                <form className="courseSelectionForm" onChange={this.onSelectedChange}>
+                <form className="courseSelectionForm" onSubmit={this.onSubmit}>
                     {courseCheckBoxes}
-                    <button  onSubmit={this.onSubmit} className="btn btn-primary btn-block"> Submit </button>
+                    <input 
+                    value="Submit" 
+                    type="submit"
+                    className="btn btn-primary btn-block" />
                 </form>
             </div>
         );
+        
     }
 }
 

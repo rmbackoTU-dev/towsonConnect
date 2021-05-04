@@ -18,6 +18,7 @@ class Register extends Component {
       userRegistered:false,
       userId:""
     }
+    this.courseRegister=this.courseRegister.bind(this);
   }
   
   
@@ -74,6 +75,18 @@ class Register extends Component {
         console.log(err);
       });
   };
+
+  courseRegister(result)
+  {
+    if(result)
+    {
+      this.props.history.push("/content");
+    }
+    else
+    {
+      console.log("Course Registration Failure");
+    }
+  }
 
   render() {
     console.log("state: ", this.state);
@@ -162,7 +175,8 @@ class Register extends Component {
     {
       return(
       <div className="register_wrapper">
-        <CourseSelect userId={this.state.userId}/>
+        <CourseSelect userId={this.state.userId}
+        onFormSubmit={this.courseRegister}/>
       </div>
       );
     }
