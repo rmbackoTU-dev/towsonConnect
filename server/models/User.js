@@ -23,10 +23,12 @@ var UserSchema = mongoose.Schema({
         required: [true, "Please enter a valid password"],
         minlength: [6, "Length must be greated than 6"]
     },
+    userType:String,
     created_at: {
         type: Date,
         default: Date.now
-    }
+    },
+    
 });
 
 // fire a function before doc saved to DB...

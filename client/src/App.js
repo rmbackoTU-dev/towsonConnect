@@ -11,6 +11,7 @@ import Login from "./components/login/Login";
 //Add a way to select a course from a list
 //import SelectCourse from "./components/login/SelectCourse";
 import Layout from './components/layout/grid-layout';
+//import CourseSelect from  './components/course-list/CourseSelect';
 
 //css imports
 import "./index.css"

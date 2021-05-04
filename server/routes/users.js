@@ -82,19 +82,20 @@ router.post('/', async (req, res) => {
 // Signup route
 router.post('/signup', async( req, res) => {
     // Get data from req.body
-    const { userName, email, password } = req.body;
+    const { userName, email, password , userType} = req.body;
 
     try {
         console.log("The user name is "+userName);
         console.log("The password is "+password);
         console.log("The email is "+email);
-        const user = await User.create({ userName, email, password}); // Creating new user...
+        console.log("The user type is "+userType);
+        const user = await User.create({ userName, email, password, userType}); // Creating new user...
         console.log("User Created successfully...");
         res.status(201).json({ status: "success", userId: user._id }); 
     } 
     catch(err) {
         console.log(err);
-        const errors = handleErrors(err);  // If any conditional error occures by the user, then handel it...
+        const errors = handleErrors(err);  // If any conditional error occures by the user, then handle it...
         res.status(400).send({ errors });  
     }   
 });
