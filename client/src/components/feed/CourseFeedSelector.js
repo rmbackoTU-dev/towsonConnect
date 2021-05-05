@@ -1,7 +1,7 @@
 //Feed Course Selector
 import React, {Component} from 'react';
 import axios from 'axios';
-import "./feed.css";
+import "./feed.scss";
 
 
 class CourseFeedSelectorItem extends Component

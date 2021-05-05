@@ -1,0 +1,148 @@
+@import "~bootstrap/scss/bootstrap";
+
+
+.sideBar
+{
+    grid-column-start:1;
+    grid-column-end: 2;
+    grid-row-start:1;
+    grid-row-end:3;
+}
+
+.sideBar > img
+{
+    margin: 5px 5px 5px 5px; 
+}
+
+.feedbox {
+    grid-column-start: 2;
+    grid-column-end: end;
+    grid-row-start:1;
+    grid-row-end:3;
+    display:grid;
+    grid-template-columns: 256px 1fr;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    border: 1px solid #BBB
+}
+
+.left-feed
+{
+    background:#E7E5E0;
+    
+}
+
+.course_list 
+{
+    list-style-type:none;
+    display:flex;
+    flex-direction: column;
+    margin:0;
+    padding:0;
+}
+
+
+.right-feed
+{
+    background: #ffffff;
+    /* margin: 0 0 0 280px; */
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    border-left: 1px solid #BBB;
+    z-index: 10;
+    
+}
+
+.notificationTitle
+{
+    border-bottom: 1px solid #BBB;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+   
+}
+
+.feed-items
+{
+    margin: 5px 25px 15px 25px;
+}
+
+.feed-item
+{
+    border: 1px solid #BBB;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    padding:10px;
+}
+
+.collapsible
+{
+    border: 1px solid #000;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    padding:10px;
+}
+
+.expandIcon
+{
+    float:right;
+    size:25px;
+    margin: 2px 0px 2px auto;
+    cursor:pointer;
+}
+
+.sideBarLink
+{
+    width:65px;
+    height: 65px;
+}
+
+.highlighted
+{
+    color:#000;
+}
+
+.unhighlighted
+{
+    color:#BBB;
+}
+
+.selectedCourse
+{
+    background-color: #dad5cc;
+    color:#375461;
+    font-size: medium;
+    border-bottom:1px black solid;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px #3b3b3973;
+}
+
+.unselectedCourse
+{
+    background-color: #E7E5E0;
+    color:#000;
+    font-size: small;
+    border-bottom:1px #3b3b39 solid;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px  #3b3b3973 ;
+}
+
+
+.courseSelectorHeaderDiv
+{
+    border-bottom: 2px #000 solid;
+    -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+}
+
+.courseSelector
+{
+    padding:0;
+}

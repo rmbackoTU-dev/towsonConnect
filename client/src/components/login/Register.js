@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import CourseSelect from "../course-list/CourseSelect";
 import axios from "axios";
-import "./register.css";
+import "./register.scss";
 
 class Register extends Component {
   

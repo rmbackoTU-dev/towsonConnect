@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+
+.threadRow {
+    justify-content: flex-start;
+}
+
+.threadRow.row{
+    padding-bottom: 5px;
+}
+
+.thread_board.container-fluid{
+    height: 100vh;
+}
+
+

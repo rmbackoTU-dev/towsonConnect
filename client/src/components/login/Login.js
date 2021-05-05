@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import "./login.css";
+import "./login.scss";
 
 
 export default class Login extends Component {
   state = {
     userNameOremail: "",
     password: "",
+    user_id: ''
   };
 
   handleChange = (event) => {
@@ -42,9 +43,18 @@ export default class Login extends Component {
         console.log("Success");
         console.log(res);
 
+        //sets user_id for transfer between components
+        this.setState({user_id: res.data.user})
+
         if(res.data.status === "success") {
             alert("Success")
-            this.props.history.push("/content")
+            //this.props.history.push("/content")
+            const location = {
+              pathname: '/content',
+              state: {user_id: this.state.user_id}
+            }
+
+            this.props.history.push(location)
         } else {
             if(res.data.errors.userName.length > 0) {
                 alert("UserName or Email not found. Please consider Signup.")
