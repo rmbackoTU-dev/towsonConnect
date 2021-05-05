@@ -10,17 +10,7 @@ var mongoose = require('mongoose');
  */
 
 //Define a schema
-/*
-var Schema=mongoose.Schema;
 
-var Notification = new Schema({
-    access_token:String,
-    short_descript: String,
-    long_descript: String,
-    hyperlink:String,
-    header: String
-});
-*/
 
 var NotificationSchema = mongoose.Schema({
     access_token: String,
@@ -30,5 +20,4 @@ var NotificationSchema = mongoose.Schema({
     header: String
 });
 
-//module.exports=mongoose.model('Notification', Notification);
 module.exports = mongoose.model("Notification", NotificationSchema);

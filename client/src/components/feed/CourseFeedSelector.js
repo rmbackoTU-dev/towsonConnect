@@ -72,11 +72,8 @@ class CourseFeedSelector extends Component
         //Setup the user id and type
         const userId=this.props.userId;
         const userType=this.props.userType;
-        console.log("Course selector got user id "+userId);
-        console.log("Course selector got user type "+userType);
         if(userType === "Teacher")
         {
-            console.log("Doing Teacher Axios Request: ");
             const teacherURL=
             {
                 url:"http://localhost:8080/teacher/"+userId,
@@ -88,9 +85,7 @@ class CourseFeedSelector extends Component
             };
             axios(teacherURL).then((response) => {
                  let studentData=response.data;
-                 console.log("Student data is: "+JSON.stringify(studentData));
                  const courses=studentData.course;
-                 console.log("Courses are: "+JSON.stringify(courses));
                  const coursesURL=
                  {
                      url:'http://localhost:8080/courses/',
@@ -108,7 +103,6 @@ class CourseFeedSelector extends Component
                      courses.forEach((course, index) =>
                      {
                          const courseId=course._id;
-                         console.log("Currently on course "+index);
                          coursesData.forEach((courseFromBackend) =>
                          {
                              if(courseId === courseFromBackend._id)
@@ -122,7 +116,6 @@ class CourseFeedSelector extends Component
                                         name: courseName,
                                         teacher:teacherName,
                                     }
-                                    console.log("Pushing "+JSON.stringify(currentCourse));
                                     allCourses.push(currentCourse); 
                                  
                              }
@@ -140,7 +133,6 @@ class CourseFeedSelector extends Component
                          axios(userEndpoint).then((result) => 
                          {          
                             const userData=result.data;
-                            console.log("From user endpoint: "+JSON.stringify(userData));
                             const teacherName=userData.userName;
                             allCourses.forEach((course, inPlaceIndex) =>
                             {
@@ -150,10 +142,8 @@ class CourseFeedSelector extends Component
                                     name: course.name,
                                     teacher:teacherName,
                                 }
-                                console.log("Pushing "+JSON.stringify(currentCourse));
                                 allCourses[inPlaceIndex]=currentCourse;
                             });
-                            console.log("Setting course list state");
                             this.setState({courseList: allCourses});
                         }).catch((err) => {
                             console.log(err);
@@ -173,7 +163,6 @@ class CourseFeedSelector extends Component
         {
 
             //Attempting to get a single user object
-            console.log("Doing Student Axios Request");
             const studentURL=
             {
                 url:"http://localhost:8080/student/"+userId,
@@ -185,9 +174,7 @@ class CourseFeedSelector extends Component
             };
             axios(studentURL).then((response) => {
                 let studentData=response.data;
-                console.log("Student data is: "+JSON.stringify(studentData));
                 const courses=studentData.course;
-                console.log("Courses are: "+JSON.stringify(courses));
                 const coursesURL=
                 {
                     url:'http://localhost:8080/courses/',
@@ -226,8 +213,6 @@ class CourseFeedSelector extends Component
                                         teacher:teacherName,
                                     }
                                     allCourses.push(currentCourse);
-                                    console.log("index is "+index);
-                                    console.log("Got Course :"+allCourses[index].name);
                                 }
                                 else
                                 {
@@ -240,8 +225,6 @@ class CourseFeedSelector extends Component
                                         teacher:teacherName,
                                     };
                                     allCourses.push(currentCourse);
-                                    console.log("index is "+index);
-                                    console.log("Got Course :"+allCourses[index].name)
                                 }
                             }
                         }
@@ -267,7 +250,6 @@ class CourseFeedSelector extends Component
                             {
                     
                                 const userData=result.data;
-                                console.log("From user endpoint: "+JSON.stringify(userData));
                                 const teacherName=userData.userName;
                                 let currentCourse=
                                 {
@@ -275,14 +257,15 @@ class CourseFeedSelector extends Component
                                     name: course.name,
                                     teacher:teacherName,
                                 }
-                                allCourses[inPlaceIndex]=currentCourse
+                                allCourses[inPlaceIndex]=currentCourse;
+                                console.log("Updating course list");
+                                this.setState({courseList: allCourses});
                                 
                             }).catch((err) => {
                                 console.log(err);
                             });
                         }
-                        console.log("Setting course list state");
-                        this.setState({courseList: allCourses});
+                        
                     });   
                 }).catch((err) =>
                 {

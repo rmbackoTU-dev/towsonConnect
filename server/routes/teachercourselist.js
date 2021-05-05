@@ -21,7 +21,6 @@ router.get("/:teacherid",async(req,res)=>{
     try{
         // Will get all courses the Student has 
         var student = await Teacher.findOne({userId:req.params.teacherid }).populate('course');
-        console.log("Sending :"+JSON.stringify(student));
         res.json(student);
     } catch (err) {
         res.json({ message: err });
@@ -41,7 +40,6 @@ router.post("/",async(req,res)=>{
     try{
         var savedTeacher = await newTeacher.save();
         res.json(savedTeacher);
-        console.log("Sent: "+JSON.stringify(savedTeacher));
     } catch (err) {
         res.json({ message: err });
     }

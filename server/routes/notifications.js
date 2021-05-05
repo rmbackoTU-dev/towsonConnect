@@ -5,8 +5,7 @@ var router = express.Router();
 var User = require('../models/User');
 //imports Notification Model
 var Notification = require('../models/Notification');
-//imports Roles model
-var Role = require('../models/Role');
+
 
 
 /**
@@ -16,21 +15,6 @@ router.get('/user/:userId', async (req, res) => {
     try{
         var user = await User.findById(req.params.userId);
         var notificationsForUser = await Notification.find({ 'access_token': user.access_token });
-        res.status(200).json(notificationsForUser);
-    }
-    catch(err){
-        res.status(403).json({ message: err });
-    }
-});
-
-/**
- * Notification end points by role
- */
-router.get('/role/:roleId', async(req, res) => {
-    try{
-        var role = await Role.findById(req.params.roleId);
-        console.log(role);
-        var notificationsForUser = await Notification.find({ 'access_token': role.access_token });
         res.status(200).json(notificationsForUser);
     }
     catch(err){

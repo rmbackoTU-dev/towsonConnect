@@ -4,7 +4,8 @@
   "description": "Backend files for Towson Connect project",
   "main": "index.js",
   "scripts": {
-    "start": "npm install & node index.js"
+    "start": "npm install & node index.js",
+    "clean": "node databaseCleaner.js"
   },
   "author": "Christopher Cox",
   "license": "ISC",

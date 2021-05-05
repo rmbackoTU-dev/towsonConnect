@@ -21,7 +21,6 @@ router.get("/:studentid",async(req,res)=>{
     try{
         // Will get all courses the Student has 
         var student = await Student.findOne({userId:req.params.studentid }).populate('course');
-        console.log("Sending :"+JSON.stringify(student));
         res.json(student);
     } catch (err) {
         res.json({ message: err });

@@ -12,11 +12,7 @@ const UserIcon= () =>
 }
 
 function LogOutButton(){
-    function handleClick(e)
-    {
-        e.preventDefault();
-        alert("Logout will be handled here")
-    }
+    
     return(
         <div className="logout-div">
             <Link to="/login" className="logout-button" id="login" role="button">
