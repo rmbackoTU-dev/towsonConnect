@@ -57,6 +57,18 @@ router.get('/:threadId', async (req,res) => {
     }
 });
 
+//gets threads based on courseId given
+router.get('/course/:courseId', async (req, res) => {
+    try{
+        var threads = await Thread.find({course_id: req.params.courseId});
+
+        res.status(200).json(threads);
+    }
+    catch(err){
+        res.json({message: err})
+    }
+});
+
 
 // Delete thread
 router.delete('/:threadId', async (req,res) => {
@@ -67,6 +79,20 @@ router.delete('/:threadId', async (req,res) => {
         res.json({ message: err });
     }
 });
+
+//updates thread
+router.patch('/:threadId', async (req, res) => {
+    try{
+        //res.json(req.body);
+        var updateObject = req.body;
+        //res.json(updateObject)
+        var update = await Thread.findByIdAndUpdate(req.params.threadId, {$set: updateObject});
+        res.json(update);
+    }
+    catch(err){
+        res.json({message: err});
+    }
+})
 
 
 

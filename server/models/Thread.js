@@ -2,9 +2,26 @@ var mongoose = require('mongoose');
 
 //define Thread schema for Mongoose operations
 var ThreadSchema = mongoose.Schema({
-    creator_id: mongoose.Schema.Types.ObjectId,
-    message_ids: [mongoose.Schema.Types.ObjectId],
-    description: String,
+    creator_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: ''
+    },
+    message_ids: {
+        type: [mongoose.Schema.Types.ObjectId],
+        default: []
+    },
+    description: {
+        type: String,
+        default: ''
+    },
+    course_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: ''
+    },
+    title: {
+        type: String,
+        default: ''
+    },
     created_at: {
         type: Date,
         default: Date.now
