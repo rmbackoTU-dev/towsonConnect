@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 
 const UserIcon= () =>
 {
@@ -9,20 +11,6 @@ const UserIcon= () =>
     )
 }
 
-function LoginButton(){
-    function handleClick(e)
-    {
-        e.preventDefault();
-        alert("Login will be handled here")
-    }
-    return(
-        <div className="login-div">
-            <a href="/" onClick={handleClick} className='login-link'>login</a>
-        </div>
-    );
-}
-
-
 function LogOutButton(){
     function handleClick(e)
     {
@@ -31,7 +19,9 @@ function LogOutButton(){
     }
     return(
         <div className="logout-div">
-            <a href="/" onClick={handleClick} className='logout-link'>login</a>
+            <Link to="/login" className="logout-button" id="login" role="button">
+                Logout
+            </Link>
         </div>
     );
 }
@@ -47,14 +37,12 @@ function LoginFlex(props)
                 <LogOutButton />
             </div>    
         );
-    }
-    else
+    }else
     {
         return( 
             <div className='accountFlex'>
-                <UserIcon />
-                <LoginButton />
-            </div> 
+                <p>Error Logging in please try again.</p>
+            </div>    
         );
     }
 }

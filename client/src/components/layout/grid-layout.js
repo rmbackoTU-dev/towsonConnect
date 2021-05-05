@@ -39,11 +39,19 @@ class Layout extends Component
         {
             content: 0,
             userId:this.props.location.state.userId,
-            userType:this.props.location.state.userType
+            userType:this.props.location.state.userType,
+            loggedIn:false
         }
         this.handleContent=this.handleContent.bind(this);
     }
 
+    componentDidMount()
+    {
+        if(this.state.userId)
+        {
+            this.setState({loggedIn: true});
+        }
+    }
 
     handleContent(page)
     {
@@ -58,7 +66,7 @@ class Layout extends Component
         return(
             <div className="content_wrapper">
                 <div className='content_header'>
-                    <HeaderTop />
+                    <HeaderTop success={this.state.loggedIn} />
                     <HeaderBottom 
                     selectedItem={this.state.content}
                     onNavigation={this.handleContent}

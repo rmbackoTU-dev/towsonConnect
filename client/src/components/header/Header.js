@@ -1,8 +1,9 @@
 import React, {Component,Fragment} from 'react';
 import LoginFlex from './LoginFlex';
 
-const HeaderTop=() =>
+const HeaderTop=(props) =>
 {
+    
     return(
         <Fragment>
             <div className='header-top'>
@@ -11,7 +12,7 @@ const HeaderTop=() =>
                         alt='Towson University Logo'
                         className='towsonLogo'/>
                 </div>
-                <LoginFlex />
+                <LoginFlex isLoggedIn={props.success}/>
             </div>
         </Fragment>
     );
