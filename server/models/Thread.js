@@ -22,6 +22,10 @@ var ThreadSchema = mongoose.Schema({
         type: String,
         default: ''
     },
+    creator_type: {
+        type: String,
+        default: ''
+    },
     created_at: {
         type: Date,
         default: Date.now

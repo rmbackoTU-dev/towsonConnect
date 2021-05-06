@@ -107,7 +107,9 @@ router.post('/login', async (req, res) => {
     //  console.log("password "+password);
     try {
         const user = await User.login(userNameOrEmail, password);  // Login the user using Statics function of User data model...
-        res.status(200).json({ status: "success", user: user._id, userType:this.user.userType});  
+
+        res.status(200).json({ status: "success", user: user._id, userType: user.userType});  
+
     } 
     catch(err) {
         // console.log(err);

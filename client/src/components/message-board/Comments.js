@@ -16,7 +16,8 @@ export class Comments extends Component {
             threadId: this.props.threadId,
             comments: this.props.comments,
             comments_ids: this.props.comments_ids,
-            userId: this.props.userId
+            userId: this.props.userId,
+            userType: this.props.userType
         }
 
         this.handleMessageChange = this.handleMessageChange.bind(this);
@@ -45,6 +46,7 @@ export class Comments extends Component {
         else{
             const payload = {
                 author_id: this.state.userId,
+                author_type: this.state.userType,
                 description: this.state.message
             }
 
@@ -106,6 +108,7 @@ export class Comments extends Component {
                                             threadId={this.state.threadId} 
                                             parentId={comment._id}
                                             userId={this.state.userId}
+                                            userType={this.state.userType}
                                             user={this.state.user}
                                             comment_ids={this.state.comments_ids}
                                             refreshPage={this.props.refreshPage}
@@ -115,6 +118,7 @@ export class Comments extends Component {
                                             threadId={this.state.threadId}
                                             parentId={comment._id}
                                             userId={this.state.userId}
+                                            userType={this.state.userType}
                                             user={this.state.user}
                                             comment_ids={this.state.comments_ids}
                                             refreshPage={this.props.refreshPage}

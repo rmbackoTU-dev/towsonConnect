@@ -88,12 +88,18 @@ class HeaderBottom  extends Component
                     selected={false}
                     onSelect={this.props.onNavigation}
                     selectedId={1}
+
+
                     outside={false}/>
+
                     <NavLink linkName='Notifications'href='/notifications'
                     selected={true}
                     onSelect={this.props.onNavigation} 
                     selectedId={0}
+
+
                     outside={false}/>
+
 
                 </div>
             );
