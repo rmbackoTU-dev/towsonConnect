@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CourseSelect from "../course-list/CourseSelect";
 import axios from "axios";
 import "./register.scss";
+import { Spinner } from 'react-bootstrap';
 
 class Register extends Component {
   
@@ -17,13 +18,19 @@ class Register extends Component {
       userType: "",
       userRegistered:false,
       userId:"",
-      userType:""
+      userType:"",
+      courses: [],
+      loaded: false
     }
     this.courseRegister=this.courseRegister.bind(this);
   }
   
-  
+  componentDidMount = () => {
+    //this.getCourses();
+    this.setState({loaded: true})
+  }
 
+  
   handleChange = (event) => {
     const target = event.target;
     const name = target.name;
@@ -104,98 +111,107 @@ class Register extends Component {
   }
 
   render() {
-    console.log("state: ", this.state);
-    const userRegister=this.state.userRegistered;
-    if(!userRegister)
-    {
-      return (
-        <div className="register_wrapper">
-          <header className="register_header">
-            <div className="form_box">
-              <div className="button_box">
-                <a href="#" id="register" className="btn btn-primary">
-                  Register
-                </a>
-                <Link to="/login" className="btn" id="login" role="button">
-                  Login
-                </Link>
-              </div>
+    if(this.state.loaded){
+      console.log("state: ", this.state);
+      const userRegister=this.state.userRegistered;
+      if(!userRegister){
+        return (
+          <div className="register_wrapper">
+            <header className="register_header">
+              <div className="form_box">
+                <div className="button_box">
+                  <a href="#" id="register" className="btn btn-primary">
+                    Register
+                  </a>
+                  <Link to="/login" className="btn" id="login" role="button">
+                    Login
+                  </Link>
+                </div>
 
-              <div className="icon_img">
-                <img src={process.env.PUBLIC_URL+"/towson-branded-logos/TowsonU_ConnectLogo-pos.png"} alt="" />
-              </div>
+                <div className="icon_img">
+                  <img src={process.env.PUBLIC_URL+"/towson-branded-logos/TowsonU_ConnectLogo-pos.png"} alt="" />
+                </div>
 
-              <form onSubmit={this.submit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="userName"
-                    value={this.state.userName}
-                    onChange={this.handleChange}
-                    className="form-control form-warning"
-                    id="exampleInputEmail1"
-                    placeholder="Username"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="example@gmail.com"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                  />
-                </div>
-                <a href="#">Forgot Password?</a>
-                {<div className="form-group">
-                  <div className="btn-group">
-                    <select
-                      className="form-control btn-shadow"
-                      name="userType"
+                <form onSubmit={this.submit}>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      name="userName"
+                      value={this.state.userName}
                       onChange={this.handleChange}
-                      value={this.state.value}
-                    >
-                      <option>Signup as</option>
-                      <option value="Student">Student</option>
-                      <option value="Teacher">Teacher</option>
-                    </select>
+                      className="form-control form-warning"
+                      id="exampleInputEmail1"
+                      placeholder="Username"
+                    />
                   </div>
-                </div> }
-                <button className="btn btn-primary btn-block">Submit</button>
-              </form>
-              <br />
-              <span>
-                You are agreed with our <a href="#">Terms & Conditions </a>and
-                <a href="#"> Privacy Policies</a>
-              </span>
-            </div>
-          </header>
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      className="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="example@gmail.com"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                      className="form-control"
+                      id="exampleInputPassword1"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <a href="#">Forgot Password?</a>
+                  {<div className="form-group">
+                    <div className="btn-group">
+                      <select
+                        className="form-control btn-shadow"
+                        name="userType"
+                        onChange={this.handleChange}
+                        value={this.state.value}
+                      >
+                        <option>Signup as</option>
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                      </select>
+                    </div>
+                  </div> }
+                  <button className="btn btn-primary btn-block">Submit</button>
+                </form>
+                <br />
+                <span>
+                  You are agreed with our <a href="#">Terms & Conditions </a>and
+                  <a href="#"> Privacy Policies</a>
+                </span>
+              </div>
+            </header>
+          </div>
+        );
+      }
+      else{
+        return(
+        <div className="register_wrapper">
+          <CourseSelect userId={this.state.userId}
+            userType={this.state.userType}
+            onFormSubmit={this.courseRegister}
+          />
         </div>
-      );
-    }else
-    {
-      return(
-      <div className="register_wrapper">
-        <CourseSelect userId={this.state.userId}
-        userType={this.state.userType}
-        onFormSubmit={this.courseRegister}/>
-      </div>
-      );
+        );
+      }
     }
+    else{
+      return (
+        <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
+      ) 
+    } 
   }
 }
 
