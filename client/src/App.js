@@ -11,12 +11,14 @@ import Login from "./components/login/Login";
 import Layout from './components/layout/grid-layout';
 import MessageBoard2 from './components/message-board/MessageBoard2';
 import ThreadBoard2 from './components/message-board/ThreadBoard2';
+import Upload from './components/mediaspace/upload';
 
 //css imports
 import "./index.scss"
 
 //bootsrap import
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 class App extends Component
@@ -33,6 +35,7 @@ class App extends Component
             <Route exact path="/content"  component={Layout}/>
             <Route exact path="/messageboard" component={MessageBoard2} />
             <Route exact path="/threadboard" component={ThreadBoard2} />
+            <Route exact path="/upload" component={Upload} />
           </Switch>
         </div>
       </Router>

@@ -44,6 +44,7 @@ export class MessageBoard2 extends Component {
             creator_id: this.props.location.state.creator_id,
             creator_name: this.props.location.state.creator_name,
             title: this.props.location.state.title,
+            uid:this.props.location.state.uid
         }
 
         this.handleContent = this.handleContent.bind(this);

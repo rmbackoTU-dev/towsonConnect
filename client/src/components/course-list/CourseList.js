@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 function CourseItem(props)
 {
+    console.log(props.userId);
     return(
         <ListGroupItem key={props.itemId} className="courseItem">
             <Card>

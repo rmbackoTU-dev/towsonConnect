@@ -41,7 +41,7 @@ class Layout extends Component
         this.state=
         {
             content: 0,
-            userId:this.props.location.state.user_id,
+            userId:this.props.location.state.userId,
             userType:this.props.location.state.userType,
             loggedIn:false,
             loaded: false

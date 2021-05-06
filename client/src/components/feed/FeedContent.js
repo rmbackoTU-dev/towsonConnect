@@ -31,6 +31,7 @@ class FeedContent extends Component
         let currentType=this.state.selectedCategory;
         let usertype=this.state.userType;
         let userId=this.state.userId;
+        console.log("Using: "+userId);
         if(selected === 'All')
         {
             if(usertype === 'Student')

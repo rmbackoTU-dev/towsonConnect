@@ -10,13 +10,17 @@
   "author": "Christopher Cox",
   "license": "ISC",
   "dependencies": {
+    "backblaze": "^2.2.0",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.25.1",
+    "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.3",
     "nodemon": "^2.0.7",
+    "pdf-image": "^2.0.0",
     "validator": "^13.5.2"
   }
 }

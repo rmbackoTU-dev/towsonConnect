@@ -94,6 +94,7 @@ class Register extends Component {
           userType:this.state.userType
         }
       }
+      console.log("userID: "+contentpage.state.userId);
       this.props.history.push(contentpage);
     }
     else
