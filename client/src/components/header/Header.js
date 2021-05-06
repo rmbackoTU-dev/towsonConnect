@@ -88,12 +88,12 @@ class HeaderBottom  extends Component
                     selected={false}
                     onSelect={this.props.onNavigation}
                     selectedId={1}
-                    outside={true}/>
+                    outside={false}/>
                     <NavLink linkName='Notifications'href='/notifications'
                     selected={true}
                     onSelect={this.props.onNavigation} 
                     selectedId={0}
-                    outside={true}/>
+                    outside={false}/>
 
                 </div>
             );
@@ -103,14 +103,22 @@ class HeaderBottom  extends Component
             console.log('Courses');
             return(
                 <div className='navbox'>
+                    <NavLink linkName='Media Space' href='/upload'
+                    selected={false}
+                    onSelect={this.props.outsideNavigation}
+                    selectedId={2}
+                    outside={true}
+                    />
                     <NavLink linkName='Courses' href='/courses'
                     selected={true}
                     onSelect={this.props.onNavigation}
-                    selectedId={1}/>
+                    selectedId={1}
+                    outside={true}/>
                     <NavLink linkName='Notifications'href='/notifications' 
                     isSelected={false}
                     onSelect={this.props.onNavigation}
                     selectedId={0}
+                    outside={true}
                      />
                 </div>
             );
