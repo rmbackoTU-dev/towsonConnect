@@ -16,7 +16,8 @@ class Register extends Component {
       password: "",
       userType: "",
       userRegistered:false,
-      userId:""
+      userId:"",
+      userType:""
     }
     this.courseRegister=this.courseRegister.bind(this);
   }
@@ -55,10 +56,15 @@ class Register extends Component {
         console.log("Success");
         console.log(res);
         const registeredUserData=res.data.userId;
+        const registeredUserType=res.data.userType;
         if (res.data.status === "success") {
           alert("Success");
-          this.setState({userId:registeredUserData,
-            userRegistered:true });
+          this.setState(
+            {
+            userId:registeredUserData,
+            userType:registeredUserType,
+            userRegistered:true 
+          });
         } else {
           if (res.data.errors.userName.length > 0) {
             alert(res.data.errors.userName);
@@ -184,6 +190,7 @@ class Register extends Component {
       return(
       <div className="register_wrapper">
         <CourseSelect userId={this.state.userId}
+        userType={this.state.userType}
         onFormSubmit={this.courseRegister}/>
       </div>
       );

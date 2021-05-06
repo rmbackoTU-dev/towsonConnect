@@ -25,6 +25,7 @@ mongoose.connect(process.env.DB_CONNECTION, options)
             }
          });
          console.log(updateCourse);
+
          mongoose.disconnect();
         
     }).catch(err => console.error(err)

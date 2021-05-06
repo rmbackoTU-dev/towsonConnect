@@ -12,12 +12,16 @@ var mongoose = require('mongoose');
 //Define a schema
 
 
-var NotificationSchema = mongoose.Schema({
-    access_token: String,
-    short_description: String,
-    long_description: String,
+const NotificationSchema = mongoose.model('Notification', new mongoose.Schema({
+    short_descript: String,
+    long_descript: String,
     hyperlink:String,
-    header: String
-});
+    header: String,
+    type:String,
+    course:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
+    }
+}));
 
-module.exports = mongoose.model("Notification", NotificationSchema);
+module.exports= NotificationSchema;

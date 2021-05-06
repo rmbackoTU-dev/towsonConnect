@@ -83,7 +83,7 @@ class SideBar extends Component
                         fontAwesomeIcon={"bell"}
                         className={"bellIcon"}
                         onSelect={this.handleNavigation}
-                        notificationType="Notifications"
+                        notificationType="Notification"
                         itemNum={0}
                     ></SideBarLink>
                     <SideBarLink
@@ -91,7 +91,7 @@ class SideBar extends Component
                         fontAwesomeIcon={"comment"}
                         className={"messageIcon"}
                         onSelect={this.handleNavigation}
-                        notificationType="Messages"
+                        notificationType="Message"
                         itemNum={1}
                     ></SideBarLink>
                 </div>
@@ -106,7 +106,7 @@ class SideBar extends Component
                         fontAwesomeIcon={"bell"}
                         className={"bellIcon"}
                         onSelect={this.handleNavigation}
-                        notificationType="Notifications"
+                        notificationType="Notification"
                         itemNum={0}
                     ></SideBarLink>
                     <SideBarLink
@@ -114,7 +114,7 @@ class SideBar extends Component
                         fontAwesomeIcon={"comment"}
                         className={"messageIcon"}
                         onSelect={this.handleNavigation}
-                        notificationType="Messages"
+                        notificationType="Message"
                         itemNum={1}
                     ></SideBarLink>
                 </div>

@@ -63,11 +63,10 @@ class CourseFeedSelector extends Component
     {
         this.setState({selected: selectedCourseKey});
         const selectedCourse=this.state.courseList[selectedCourseKey];
-        const selectedCourseName=selectedCourse.name;
-        return(this.props.onCourseChange(selectedCourseName));
+        return(this.props.onCourseChange(selectedCourse));
     }
 
-    componentDidMount()
+    async componentDidMount()
     {
         //Setup the user id and type
         const userId=this.props.userId;
@@ -145,6 +144,9 @@ class CourseFeedSelector extends Component
                                 allCourses[inPlaceIndex]=currentCourse;
                             });
                             this.setState({courseList: allCourses});
+                            //pass the selected course to the Feed
+                            let selectedCourse=allCourses[this.state.selected];
+                            this.props.onCourseChange(selectedCourse);
                         }).catch((err) => {
                             console.log(err);
                         });
@@ -225,6 +227,9 @@ class CourseFeedSelector extends Component
                                         teacher:teacherName,
                                     };
                                     allCourses.push(currentCourse);
+                                    //pass the selected course to the Feed
+                                    let selectedCourse=allCourses[this.state.selected];
+                                    this.props.onCourseChange(selectedCourse);
                                 }
                             }
                         }

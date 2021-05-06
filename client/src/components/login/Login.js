@@ -87,7 +87,7 @@ export default class Login extends Component {
               </a>
             </div>
 
-            <div class="icon_img">
+            <div className="icon_img">
               <img src={process.env.PUBLIC_URL+"/towson-branded-logos/TowsonU_ConnectLogo-pos.png"} alt="" />
             </div>
 

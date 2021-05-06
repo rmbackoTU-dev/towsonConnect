@@ -66,7 +66,6 @@ class CourseSelect extends Component
         this.state=
         {
             coursesToList:[],
-            role:"",
             success:false,
             coursesSelected:[],
         }
@@ -75,25 +74,27 @@ class CourseSelect extends Component
     }
 
 
-    componentDidMount()
+    async componentDidMount()
     {
         const userId=this.props.userId;
+        const userType=this.props.userType;
         console.log("Got user id from register: "+userId);
-        let userEndpoint=
+        console.log("Got user type from register: "+userType);
+        // let userEndpoint=
+        // {
+        //     url: "http://localhost:8080/users/"+userId,
+        //     method: "get",
+        // }
+        // axios(userEndpoint).then((res)=>
+        // {
+        //     const userData=res.data;
+        //     console.log("User Data: "+JSON.stringify(userData));
+        //     const userRole=userData.userType;
+        //     this.setState({role:userRole});
+        //     console.log("User Role: "+userRole);
+        if(userType === "Teacher")
         {
-            url: "http://localhost:8080/users/"+userId,
-            method: "get",
-        }
-        axios(userEndpoint).then((res)=>
-        {
-            const userData=res.data;
-            console.log("User Data: "+JSON.stringify(userData));
-            const userRole=userData.userType;
-            this.setState({role:userRole});
-            console.log("User Role: "+userRole);
-            if(userRole === "Teacher")
-            {
-                console.log("Gathering courses left to teach");
+            console.log("Gathering courses left to teach");
             let coursesEndpoint=
             {
                 url: "http://localhost:8080/courses/",
@@ -123,7 +124,7 @@ class CourseSelect extends Component
                 console.log(err);
             });
         }
-        else if(userRole === 'Student')
+        else if(userType === 'Student')
         {
             console.log("Gathering courses to signup for");
             let coursesEndpoint=
@@ -144,16 +145,16 @@ class CourseSelect extends Component
             {
                 console.log(err);
             });
-            }
-    }).catch((err)=>
-    {
-        console.log(err);
-    })
-            
+        }
+    // }).catch((err)=>
+    // {
+    //     console.log(err);
+    // })
     }
 
     onSubmit(event)
     {
+        const userType=this.props.userType;
         event.preventDefault();
         let values=this.state.coursesSelected;
         let idList=new Array(values.length);
@@ -192,7 +193,8 @@ class CourseSelect extends Component
                 }
             }
         });
-        if(this.state.role === "Teacher")
+
+        if( userType === "Teacher")
         {
             let teachersPostEndpoint=
                     {
@@ -207,15 +209,14 @@ class CourseSelect extends Component
                     axios(teachersPostEndpoint).then((res) => {
                         const responseData=res.data
                         console.log(responseData);
-                        this.setState({success:true});
-                    
                     }).catch((err) => 
                     {
                         console.log(err);
                         this.setState({success:false});
-                    })
+                        this.props.onFormSubmit(this.state.success);
+                    });
         }
-        else if(this.state.role === "Student")
+        else if(userType === "Student")
         {
             let studentsPostEndpoint=
                     {
@@ -231,19 +232,21 @@ class CourseSelect extends Component
                 const responseData=res.data
                 console.log(responseData);
                 this.setState({success:true});
-                    
+                this.props.onFormSubmit(this.state.success);
             }).catch((err) => 
             {
                 console.log(err);
                 this.setState({success:false});
-            })
+                this.props.onFormSubmit(this.state.success);
+            });
         }
+
         limitedList.forEach((course) =>
         {
             let newCourse={
                 _id:0,
             };
-            if(this.state.role === "Teacher")
+            if(userType === "Teacher")
             {
                 console.log("Modifying: \n"+
                 JSON.stringify(course));
@@ -271,18 +274,17 @@ class CourseSelect extends Component
                         const responseData=res.data
                         console.log(responseData);
                         this.setState({success:true});
+                        this.props.onFormSubmit(this.state.success);
                     }).catch((err) => 
                     {
                         console.log(err);
                         this.setState({success:false});
+                        this.props.onFormSubmit(this.state.success);
                     })
             }
-            
-            
-           
         });
         console.log("Unloading all request");
-        this.props.onFormSubmit(this.state.success);
+        
         
     }
 
