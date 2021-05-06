@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import './ThreadCard.scss';
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 export class ThreadCard extends Component {
     constructor(props){
@@ -13,14 +15,40 @@ export class ThreadCard extends Component {
             userName: '',
             userId: this.props.userId,
             userType: this.props.userType,
-            course_id: this.props.course_id
+            course_id: this.props.course_id,
+            showDeleteButton: false
         }
 
         this.getUserName = this.getUserName.bind(this);
+        this.showDeleteButton = this.showDeleteButton.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount = () => {
         this.getUserName();
+    }
+
+    showDeleteButton = () => {
+        if(this.state.userId === this.state.thread.creator_id){
+            return(
+                <Button variant="danger" onClick={this.handleClick}>Delete</Button>
+            )
+        }
+    }
+
+    handleClick = (event) => {
+        event.preventDefault();
+
+        var url = "http://localhost:8080/threads/";
+        url = url.concat(this.state.thread._id)
+
+        axios.delete(url)
+            .then(res => {
+                this.props.refreshBoard();
+            })
+            .catch(() => {
+                console.log("Error deleting thread")
+            })
     }
 
     getUserName = () => {
@@ -72,6 +100,7 @@ export class ThreadCard extends Component {
                     <Card.Text>
                         {this.state.thread.description}
                     </Card.Text>
+                    {this.showDeleteButton()}
                 </Card.Body>
             </Card>
         )
