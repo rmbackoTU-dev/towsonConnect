@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 function CourseItem(props)
 {
-    console.log(props.userId);
     return(
         <ListGroupItem key={props.itemId} className="courseItem">
             <Card>
@@ -41,11 +40,14 @@ class CourseList extends Component
         }
 
         this.getCourses = this.getCourses.bind(this);
+        this.updateTeacherName=this.updateTeacherName.bind(this);
     }
 
-    componentDidMount()
+    async componentDidMount()
     {
-        this.getCourses();
+        await this.getCourses();
+        console.log("State "+JSON.stringify(this.state.courses_));
+        await this.updateTeacherName();
         
     }
 
@@ -53,12 +55,43 @@ class CourseList extends Component
         await axios.get("http://localhost:8080/courses")
             .then(res => {
                 //console.log("Courses in res: ", res);
-
+                console.log("Length: "+res.data.length);
                 this.setState({courses_: res.data, loaded: true})
             })
             .catch(() => {
                 console.log("Error getting courses");
             })
+    }
+
+    updateTeacherName = async () =>
+    {
+        let courses=this.state.courses_;
+        console.log("Courses length "+courses.length);
+        for(let i=0; i< courses.length; i++)
+        {
+            let item=courses[i];
+            let teacherID=item.Teacher;
+            if(teacherID == null )
+            {
+                item["Teacher"]="Unregistered";
+                console.log("Teacher: "+item["Teacher"]);
+                courses[i]=item;
+            }
+            else{
+                await axios.get("http://localhost:8080/users/"+teacherID)
+                .then(res => {
+                    console.log("Courses in res: ", JSON.stringify(res));
+                    let currentUserName=res.data.userName;
+                    item["Teacher"]=currentUserName;
+                    console.log("Teacher: "+item["Teacher"]);
+                    courses[i]=item;
+                })
+                .catch(() => {
+                    console.log("Error getting courses");
+                });
+            }
+        }
+        this.setState({courses_:courses});
     }
 
     render()
