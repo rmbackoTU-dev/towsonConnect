@@ -63,6 +63,7 @@ export class ThreadBoard2 extends Component {
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.displayThreads = this.displayThreads.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.refreshBoard = this.refreshBoard.bind(this);
     }
 
     componentDidMount = () => {
@@ -155,6 +156,11 @@ export class ThreadBoard2 extends Component {
         });
     }
 
+    refreshBoard = () => {
+        this.setState({loaded: false});
+        this.getThreads();
+    }
+
     displayThreads = () => {
         //if(!this.state.threads.length) return null;
 
@@ -169,7 +175,14 @@ export class ThreadBoard2 extends Component {
 
         return this.state.threads.map(thread => (
             <Row key={thread._id} className="threadRow">
-                <ThreadCard course_id={this.state.course_id} thread={thread} userId={this.state.userId} userType={this.state.userType} users={this.state.users} />
+                <ThreadCard 
+                    course_id={this.state.course_id} 
+                    thread={thread} 
+                    userId={this.state.userId} 
+                    userType={this.state.userType} 
+                    users={this.state.users} 
+                    refreshBoard={this.refreshBoard}
+                />
             </Row>
         ));
     }
