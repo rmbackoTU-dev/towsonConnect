@@ -15,7 +15,6 @@ export class Comment extends Component {
             parentId: this.props.parentId,
             userId: this.props.userId,
             comment_ids: this.props.comment_ids,
-            user: this.props.user,
             author: ''
         }
 
@@ -72,11 +71,13 @@ export class Comment extends Component {
                 parent_id: this.state.parentId
             }
 
+            //https://limitless-mountain-55127.herokuapp.com/messages
             axios.post('http://localhost:8080/messages', payload)
                 .then(res => {
                     console.log("Reply successfully saved");
                     console.log("Saved Reply: ", res);
 
+                    //https://limitless-mountain-55127.herokuapp.com/messages/addChild/
                     var str = 'http://localhost:8080/messages/addChild/';
                     str = str.concat(this.state.parentId);
 
@@ -89,7 +90,8 @@ export class Comment extends Component {
                             console.log("Updated parent: ", resp);
 
                             //this.props.refreshPage();
-                            
+
+                            //https://limitless-mountain-55127.herokuapp.com/threads/
                             var str = 'http://localhost:8080/threads/';
                             str = str.concat(this.state.threadId);
                             

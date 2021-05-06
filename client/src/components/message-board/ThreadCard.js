@@ -10,7 +10,8 @@ export class ThreadCard extends Component {
         this.state = {
             thread: this.props.thread,
             users: this.props.users,
-            userName: ''
+            userName: '',
+            userId: this.props.userId
         }
 
         this.getUserName = this.getUserName.bind(this);
@@ -49,7 +50,7 @@ export class ThreadCard extends Component {
                                 creator_id: this.state.thread.creator_id,
                                 title: this.state.thread.title,
                                 uid: this.props.userId,
-                                user: this.props.user
+                                userId: this.state.userId
                             }
                         }}>
                         <Card.Title>

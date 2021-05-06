@@ -36,7 +36,7 @@ export class MessageBoard2 extends Component {
             loaded: false,
             content: 0,
             messages: [],
-            user: this.props.location.state.user,
+            userId: this.props.location.state.userId,
             thread_id: this.props.location.state.thread_id,
             desc: this.props.location.state.desc,
             created_at: this.props.location.state.created_at,
@@ -58,6 +58,7 @@ export class MessageBoard2 extends Component {
 
     getMessages = async () => {
         var messages_ = [];
+        //https://limitless-mountain-55127.herokuapp.com/messages
         await axios.get('http://localhost:8080/messages')
             .then(res => {
                 res.data.forEach(message_ => {
@@ -111,7 +112,7 @@ export class MessageBoard2 extends Component {
                     <Row className="d-flex justify-content-center">
                         <Col lg="12">
                           <Comments 
-                                userID={this.state.uid} 
+                                userId={this.state.userId} 
                                 threadId={this.state.thread_id} 
                                 comments={this.state.messages} 
                                 comments_ids={this.state.message_ids}
