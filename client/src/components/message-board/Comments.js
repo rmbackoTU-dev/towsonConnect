@@ -15,7 +15,8 @@ export class Comments extends Component {
             message: '',
             threadId: this.props.threadId,
             comments: this.props.comments,
-            comments_ids: this.props.comments_ids
+            comments_ids: this.props.comments_ids,
+            userId: this.props.userId
         }
 
         this.handleMessageChange = this.handleMessageChange.bind(this);
@@ -43,10 +44,11 @@ export class Comments extends Component {
         }
         else{
             const payload = {
-                author_id: this.state.user._id,
+                author_id: this.state.userId,
                 description: this.state.message
             }
 
+            //https://limitless-mountain-55127.herokuapp.com/messages
             axios.post('http://localhost:8080/messages', payload)
                 .then(res => {
                     console.log("Saved message: ", res);
@@ -103,7 +105,7 @@ export class Comments extends Component {
                                             comment={comment} 
                                             threadId={this.state.threadId} 
                                             parentId={comment._id}
-                                            userId={this.state.uid}
+                                            userId={this.state.userId}
                                             user={this.state.user}
                                             comment_ids={this.state.comments_ids}
                                             refreshPage={this.props.refreshPage}
@@ -112,7 +114,7 @@ export class Comments extends Component {
                                             comments={this.state.comments}
                                             threadId={this.state.threadId}
                                             parentId={comment._id}
-                                            userId={this.state.uid}
+                                            userId={this.state.userId}
                                             user={this.state.user}
                                             comment_ids={this.state.comments_ids}
                                             refreshPage={this.props.refreshPage}

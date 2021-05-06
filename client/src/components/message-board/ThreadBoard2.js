@@ -117,6 +117,7 @@ export class ThreadBoard2 extends Component {
             description: this.state.description
         }
 
+        //https://limitless-mountain-55127.herokuapp.com/threads
         axios.post("http://localhost:8080/threads", payload)
             .then(res => {
                 this.resetInputs();
@@ -150,7 +151,7 @@ export class ThreadBoard2 extends Component {
 
         return this.state.threads.map(thread => (
             <Row key={thread._id} className="threadRow">
-                <ThreadCard thread={thread} user={this.state.user} users={this.state.users} />
+                <ThreadCard thread={thread} userId={this.state.userId} users={this.state.users} />
             </Row>
         ));
     }
