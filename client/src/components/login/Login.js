@@ -9,7 +9,8 @@ export default class Login extends Component {
   state = {
     userNameOremail: "",
     password: "",
-    userId: ''
+    userId: '',
+    userType: ''
   };
 
   handleChange = (event) => {
@@ -44,14 +45,16 @@ export default class Login extends Component {
         console.log(res);
 
         //sets user_id for transfer between components
-        this.setState({userId: res.data.user})
+        this.setState({userId: res.data.user,
+                      userType:res.data.userType})
 
         if(res.data.status === "success") {
             alert("Success")
             //this.props.history.push("/content")
             const location = {
               pathname: '/content',
-              state: {userId: this.state.userId}
+              state: {userId: this.state.userId,
+                      userType:this.state.userType}
             }
 
             this.props.history.push(location)

@@ -30,7 +30,15 @@ class NavLink extends Component
         handleClick(e)
         {
             e.preventDefault();
-            this.props.onSelect(this.props.selectedId);
+            if(!this.props.outside)
+            {
+                this.props.onSelect(this.props.selectedId);
+            }
+            else
+            {
+                console.log(this.props.onSelect);
+                this.props.onSelect(this.props.href);
+            }
         }
 
         render()
@@ -71,14 +79,22 @@ class HeaderBottom  extends Component
             console.log('Notification');
             return(
                 <div className='navbox'>
+                    <NavLink linkName='Media Space' href='/upload'
+                    selected={false}
+                    onSelect={this.props.outsideNavigation}
+                    outside={true}
+                    />
                     <NavLink linkName='Courses' href='/courses'
                     selected={false}
                     onSelect={this.props.onNavigation}
-                    selectedId={1}/>
+                    selectedId={1}
+                    outside={true}/>
                     <NavLink linkName='Notifications'href='/notifications'
                     selected={true}
                     onSelect={this.props.onNavigation} 
-                    selectedId={0}/>
+                    selectedId={0}
+                    outside={true}/>
+
                 </div>
             );
         }

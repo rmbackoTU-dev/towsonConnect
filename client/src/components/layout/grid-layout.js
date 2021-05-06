@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {HeaderTop, HeaderBottom } from '../header/Header';
 import FeedContent from '../feed/FeedContent';
 import CourseList from '../course-list/CourseList';
+import { Link } from "react-router-dom";
 import './layout.scss';
 import { Spinner } from 'react-bootstrap';
 
@@ -48,6 +49,7 @@ class Layout extends Component
         }
         this.handleContent=this.handleContent.bind(this);
         this.setLoggedIn = this.setLoggedIn.bind(this);
+        this.handleOutsideNavigation=this.handleOutsideNavigation.bind(this);
     }
 
     componentDidMount()
@@ -65,13 +67,18 @@ class Layout extends Component
         this.setState({content: page});
     }
 
+    handleOutsideNavigation(url)
+    {
+        this.props.history.push(url);
+    }
+
     render()
     {
         if(this.state.loaded){
             console.log("The user id for this user is "+this.state.userId);
             console.log("The user type for this user is "+this.state.userType);
             console.log("Logged in: ", this.state.loggedIn);
-            
+            console.log("Outside navigations: "+this.handleOutsideNavigation);
             return(
                 <div className="content_wrapper">
                     <div className='content_header'>
@@ -79,6 +86,7 @@ class Layout extends Component
                         <HeaderBottom 
                             selectedItem={this.state.content}
                             onNavigation={this.handleContent}
+                            outsideNavigation={this.handleOutsideNavigation}
                         />
                     </div>
                     <ContentSelection 
