@@ -57,6 +57,23 @@ router.delete('/:messageId', async (req,res) => {
 
 
 
+//adds a new message id to children_ids field
+router.patch('/addChild/:parentId', async (req, res) => {
+    var updateObject = req.body.commentId;
+    try{
+        var m = await Message.findById(req.params.parentId).then(doc => {
+            doc.children_ids.push(updateObject);
+
+            doc.save();
+
+            res.json(doc);
+        });
+    } catch (err) {
+        res.json({message: err});
+    }
+});
+
+
 
 
 module.exports = router;

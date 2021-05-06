@@ -16,7 +16,10 @@
     -moz-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
     -webkit-box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
     box-shadow: -4px 6px 12px rgba(0, 0, 0, .15);
+    height: 100vh;
 }
+
+
 
 .courseHeaderDiv
 {
@@ -39,4 +42,19 @@
     padding-left: 0;
     margin-bottom: 0;
     border-radius: .25rem;
+    width: 100%;
+}
+
+.col-md-6.offset-md-3{
+    height: 100%;
+}
+
+.courseListWrapper.container-fluid{
+    margin-top: 0px;
+    width: 100%;
+}
+
+.header{
+    border: 1px black solid;
+    background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
 }

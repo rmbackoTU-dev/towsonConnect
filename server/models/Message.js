@@ -3,6 +3,10 @@ var mongoose = require('mongoose');
 //define Message schema for Mongoose operations
 var MessageSchema = mongoose.Schema({
     author_id: mongoose.Schema.Types.ObjectId,
+    author_type: {
+        type: String, 
+        default: ''
+    },
     description: String,
     count: {
         type: Number,

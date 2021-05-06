@@ -11,7 +11,9 @@ export class ThreadCard extends Component {
             thread: this.props.thread,
             users: this.props.users,
             userName: '',
-            userId: this.props.userId
+            userId: this.props.userId,
+            userType: this.props.userType,
+            course_id: this.props.course_id
         }
 
         this.getUserName = this.getUserName.bind(this);
@@ -24,13 +26,19 @@ export class ThreadCard extends Component {
     getUserName = () => {
         let user_;
         
-        this.state.users.forEach(user => {
-            if(this.state.thread.creator_id === user._id){
-                user_ = user;
-            }
-        })
+        if(this.state.users.length === 0){
+            //do nothing
+        }
+        else{
+            this.state.users.forEach(user => {
+                if(this.state.thread.creator_id === user._id){
+                    user_ = user;
+                }
+            })
 
-        this.setState({userName: user_.userName})
+            this.setState({userName: user_.userName})
+        }
+        
         
     }
 
@@ -38,7 +46,9 @@ export class ThreadCard extends Component {
         console.log("Thread card state: ", this.state)
         return (
             <Card className="threadCard">
-                <Card.Header>by: {this.state.userName}</Card.Header>
+                {this.state.thread.creator_type === "Student" ? 
+                    <Card.Header>s/ {this.state.userName}</Card.Header> : <Card.Header>t/ {this.state.userName}</Card.Header>
+                }
                 <Card.Body>
                     <Link to={{
                             pathname: '/messageboard',
@@ -50,7 +60,9 @@ export class ThreadCard extends Component {
                                 creator_id: this.state.thread.creator_id,
                                 title: this.state.thread.title,
                                 uid: this.props.userId,
-                                userId: this.state.userId
+                                userId: this.state.userId,
+                                userType: this.state.userType,
+                                course_id: this.state.course_id
                             }
                         }}>
                         <Card.Title>

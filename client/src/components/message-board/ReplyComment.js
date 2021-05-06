@@ -12,6 +12,7 @@ export class ReplyComment extends Component {
             threadId: this.props.threadId,
             parentId: this.props.parentId,
             userId: this.props.userId,
+            userType: this.props.userType,
             comment_ids: this.props.comment_ids,
             commentNum: 0,
             showComments: false,
@@ -64,6 +65,7 @@ export class ReplyComment extends Component {
                                                     threadId={this.state.threadId}
                                                     parentId={comment._id}
                                                     userId={this.state.userId}
+                                                    userType={this.state.userType}
                                                     user={this.state.user}
                                                     comment_ids={this.state.comment_ids}
                                                     refreshPage={this.props.refreshPage}
@@ -73,6 +75,7 @@ export class ReplyComment extends Component {
                                                     threadId={this.state.threadId}
                                                     parentId={comment._id}
                                                     userId={this.state.userId}
+                                                    userType={this.state.userType}
                                                     user={this.state.user}
                                                     comment_ids={this.state.comments_ids}
                                                     refreshPage={this.props.refreshPage}

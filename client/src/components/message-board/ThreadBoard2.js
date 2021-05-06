@@ -5,6 +5,7 @@ import FeedContent from '../feed/FeedContent';
 import CourseList from '../course-list/CourseList';
 import axios from 'axios';
 import ThreadCard from './ThreadCard';
+import { Link } from 'react-router-dom';
 import './ThreadBoard.scss';
 
 
@@ -16,7 +17,10 @@ function ContentSelection(props)
     {
         return(
             <div className='feedWrapper'>
-                <FeedContent />
+                <FeedContent 
+                    userId={props.userId}
+                    userType={props.userType}
+                />
             </div>
         );
     }
@@ -24,7 +28,10 @@ function ContentSelection(props)
     {
         return(
             <div className='outerCourseWrapper'>
-                <CourseList />
+                <CourseList 
+                    userId={props.userId}
+                    userType={props.userType}
+                />
             </div>
         );
     }
@@ -43,7 +50,8 @@ export class ThreadBoard2 extends Component {
             showForm: false,
             title: '',
             description: '',
-            userId: this.props.location.state.userId
+            userId: this.props.location.state.userId,
+            userType: this.props.location.state.userType
         }
 
         this.handleContent = this.handleContent.bind(this);
@@ -112,6 +120,7 @@ export class ThreadBoard2 extends Component {
 
         const payload = {
             creator_id: this.state.userId,
+            creator_type: this.state.userType,
             course_id: this.state.course_id,
             title: this.state.title,
             description: this.state.description
@@ -147,11 +156,20 @@ export class ThreadBoard2 extends Component {
     }
 
     displayThreads = () => {
-        if(!this.state.threads.length) return null;
+        //if(!this.state.threads.length) return null;
+
+        if(this.state.threads.length === 0){
+            return (
+                <div className="no-threads">
+                    <h1>It looks like there are no threads here</h1>
+                    <h3>How about you bring some life here by creating a new thread</h3>
+                </div>
+            )
+        }
 
         return this.state.threads.map(thread => (
             <Row key={thread._id} className="threadRow">
-                <ThreadCard thread={thread} userId={this.state.userId} users={this.state.users} />
+                <ThreadCard course_id={this.state.course_id} thread={thread} userId={this.state.userId} userType={this.state.userType} users={this.state.users} />
             </Row>
         ));
     }
@@ -163,10 +181,21 @@ export class ThreadBoard2 extends Component {
                 <Container fluid className="thread_board">
                     <Row className='content_header'>
                         <HeaderTop />
-                        <HeaderBottom 
-                        selectedItem={this.state.content}
-                        onNavigation={this.handleContent}
-                        />
+                        <Col>
+                            <Row className="justify-content-end">
+                                <Link to={{
+                                        pathname: '/course-list',
+                                        state: {userId: this.state.userId, userType: this.state.userType}
+                                    }}>
+                                    <Button>Courses</Button>
+                                </Link> 
+                            </Row>
+                            <Row className="justify-content-end">
+                            <Link to="/login" className="logout-button" id="login" role="button" style={{color: "#ffc00f", "padding-top": "9px"}}>
+                                Logout
+                            </Link>
+                            </Row>
+                        </Col>
                     </Row>
                     <Row className="d-flex justify-content-end">
                         <Col>
@@ -198,7 +227,7 @@ export class ThreadBoard2 extends Component {
                     </Row>
                     <Row className="d-flex justify-content-center">
                         <Col lg="8">
-                            Threadboard
+                            <Row className="d-flex justify-content-center"><h1 style={{color: 'white'}}>Threadboard</h1></Row>
                             {this.displayThreads()}
                         </Col>  
                     </Row>

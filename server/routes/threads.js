@@ -38,7 +38,7 @@ router.post('/', async (req,res) => {
 // get specific thread
 router.get('/:threadId', async (req,res) => {
     try{
-        var thread = await Thread.findById(req.params.threadId);
+        var thread = await Thread.findById(req.params.threadId); 
         console.log(thread);
         //array holding message ids
         var m_ids = thread.message_ids;

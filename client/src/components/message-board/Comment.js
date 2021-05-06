@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Row, Col, Form, FormGroup, FormControl, FormLabel, Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Row, Col, Form, FormGroup, FormControl, FormLabel, Button, ButtonGroup, Card, Spinner } from 'react-bootstrap';
 import './Comments.scss';
 
 export class Comment extends Component {
@@ -14,8 +14,11 @@ export class Comment extends Component {
             message: '',
             parentId: this.props.parentId,
             userId: this.props.userId,
+            userType: this.props.userType,
             comment_ids: this.props.comment_ids,
-            author: ''
+            author: '',
+            author_type: '',
+            loaded: false
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -34,7 +37,8 @@ export class Comment extends Component {
         url = url.concat(this.state.comment.author_id);
         await axios.get(url)
             .then(res => {
-                this.setState({author: res.data.userName})
+                console.log("Author res: ", res)
+                this.setState({author: res.data.userName, author_type: res.data.userType, loaded: true})
             })
             .catch(() => {
                 console.log("Error getting user for comment")
@@ -66,7 +70,8 @@ export class Comment extends Component {
         }
         else{
             const payload = {
-                author_id: this.state.user._id,
+                author_id: this.state.userId,
+                author_type: this.state.userType,
                 description: this.state.message,
                 parent_id: this.state.parentId
             }
@@ -115,37 +120,48 @@ export class Comment extends Component {
     }
 
     render() {
-        console.log("Comment state: ", this.state)
-        return (
-            <>
-                <Row className="wol">
-                    <Card className="wol_inner">
-                        <Card.Body>
-                            <Card.Subtitle></Card.Subtitle>
-                            {this.state.comment.description}
-                        </Card.Body>
-                    </Card>
-                </Row>
-                <Row className="wolp">
-                   {this.state.showReplyForm ? 
-                    <Form onSubmit={this.handleSubmit} className="dform">
-                        <FormGroup controlId="replyText">
-                            <FormControl 
-                                as="textarea" 
-                                rows={3} 
-                                placeholder="What's on your mind?"
-                                value={this.state.message}
-                                onChange={this.handleMessageChange} 
-                            />
-                        </FormGroup>
-                        <ButtonGroup aria-label="basic example">
-                            <Button variant="primary" type="submit" className="hnb2">Submit</Button>
-                            <Button variant="warning" onClick={this.handleClick}>Cancel</Button>
-                        </ButtonGroup>
-                    </Form> : <Button variant="light" onClick={this.handleClick} className="rep_button">Reply</Button>} 
-                </Row>
-            </>
-        )
+        if(this.state.loaded){
+            console.log("Comment state: ", this.state)
+            return (
+                <>
+                    <Row className="wol">
+                        <Card className="wol_inner">
+                            <Card.Body>
+                                {this.state.author_type === "Student" ? 
+                                    <Card.Subtitle>s/ {this.state.author}</Card.Subtitle> : <Card.Subtitle>t/ {this.state.author_type}</Card.Subtitle>}
+                                {this.state.comment.description}
+                            </Card.Body>
+                        </Card>
+                    </Row>
+                    <Row className="wolp">
+                    {this.state.showReplyForm ? 
+                        <Form onSubmit={this.handleSubmit} className="dform">
+                            <FormGroup controlId="replyText">
+                                <FormControl 
+                                    as="textarea" 
+                                    rows={3} 
+                                    placeholder="What's on your mind?"
+                                    value={this.state.message}
+                                    onChange={this.handleMessageChange} 
+                                />
+                            </FormGroup>
+                            <ButtonGroup aria-label="basic example">
+                                <Button variant="primary" type="submit" className="hnb2">Submit</Button>
+                                <Button variant="warning" onClick={this.handleClick}>Cancel</Button>
+                            </ButtonGroup>
+                        </Form> : <Button variant="light" onClick={this.handleClick} className="rep_button">Reply</Button>} 
+                    </Row>
+                </>
+            )
+        }
+        else{
+            return (
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            )
+        }
+        
     }
 }
 
