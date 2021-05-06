@@ -52,14 +52,20 @@ class CourseList extends Component
     }
 
     getCourses = async () => {
-        await axios.get("http://localhost:8080/courses")
+        var url2 = "http://localhost:8080/student/";
+        url2 = url2.concat(this.state.userId);
+        let w;
+
+        await axios.get(url2)
             .then(res => {
-                //console.log("Courses in res: ", res);
-                console.log("Length: "+res.data.length);
-                this.setState({courses_: res.data, loaded: true})
+                console.log("From students table: ", res)
+                w = res.data.course;
+                console.log("W: ", w)
+
+                this.setState({courses_: w})
             })
             .catch(() => {
-                console.log("Error getting courses");
+                console.log("Error getting from students table")
             })
     }
 
@@ -91,7 +97,7 @@ class CourseList extends Component
                 });
             }
         }
-        this.setState({courses_:courses});
+        this.setState({courses_:courses, loaded: true});
     }
 
     render()
